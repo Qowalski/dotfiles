@@ -261,8 +261,6 @@ bar {
 
 # Autostart {{{
 
-## exec always
-
 # polybar
 # exec_always --no-startup-id \
 #     pgrep polybar \
@@ -275,6 +273,7 @@ exec_always --no-startup-id \
     && killall -s USR1 compton \
     || compton --config ~/.config/compton/config
 
+# dunst
 exec_always --no-startup-id killall dunst; dunst \
     -lf  "$foreground" -nf  "$foreground" -cf  "$background" \
     -lb  "$background" -nb  "$black"      -cb  "$bred" \
@@ -283,7 +282,6 @@ exec_always --no-startup-id killall dunst; dunst \
 ## wallpaper
 exec_always --no-startup-id feh --bg-scale $HOME/pictures/wallpaper.png
 
-## exec once
 # notifications
 exec --no-startup-id notification notes
 exec --no-startup-id notification updates
