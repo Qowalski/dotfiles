@@ -1,0 +1,61 @@
+#!/bin/bash
+
+id=249827
+
+case $1 in
+    'stop') 
+                if [[ $(pgrep entr) ]]; then
+                    killall -q entr
+                    echo -e "\e[1;31mStopped\e[m all config sessions."
+                    dunstify -r $id "econf" "<span weight='bold' color='$(xgetres color1)'>Stopped</span> all config sessions."
+                else
+                    echo "No config sessions running."
+                    dunstify -r $id "econf" "No config sessions running."
+                fi
+                ;;
+
+    '--help'|'-h')
+                echo -e "\e[1;36mOptions:\e[m stop, [prog]"
+                ;;
+
+    '')
+                echo -e "\e[1;31mNo\e[m subarguments given."
+                echo -e "\e[1;36mOptions:\e[m --help or -h, stop, compton, sxhkd, i3, i3blocks, st"
+                dunstify -u critical -r $id "econf" "<span color='$(xgetres color6)'>No</span> subarguments given!"
+                ;;
+
+    *)
+                echo -e "\e[1;32mStarting\e[m config session for \e[1m'$1'."
+                dunstify -r $id "econf" "<span weight='bold' color='$(xgetres color2)'>Starting</span> config session for <b>$1</b>"
+                ;;&
+
+    'compton')
+                echo "$HOME/.config/compton/config" | entr killall -s USR1 compton
+                ;;
+
+    'i3')
+                echo "$HOME/.config/i3/config" | entr i3 restart
+                ;;
+
+    'i3blocks')
+                echo "$HOME/.config/i3blocks/config" | entr i3 restart
+                ;;
+
+    'xres')
+                echo "$HOME/.Xresources" | entr xrdb -merge ~/.Xresources
+                ;;
+
+    'polybar')
+                echo "$HOME/.config/polybar/config" | entr killall -s USR1 polybar
+                ;;
+
+    'dunst')
+                echo "$HOME/.config/dunst/dunstrc" | entr reload-dunst
+                ;;
+
+    *)
+                echo -e "\e[1;31mFailed\e[m to start config session for \e[1m'$1'."
+                echo -e "\e[1;36mOptions:\e[m stop, compton, sxhkd, i3, i3blocks, st"
+                dunstify -r $id -u critical "econf" "<span weight='bold' color='$(xgetres color1)'>FAILED</span> to start config session for <b>$1</b>."
+                ;;
+esac

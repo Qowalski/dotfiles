@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [[ $1 == "" ]] || [[ $1 == "-h" ]]; then
+    echo "colorscheme [-h] [-c] [-s]"
+    echo ""
+    echo "-h            print this message"
+    echo "-c [color]    copy color to clipboard"
+    echo "-s [color]    show color"
+fi
+
+names=(
+        'black'  'red'  'green'  'yellow'  'blue'  'magenta'  'cyan'  'white'
+        'bblack' 'bred' 'bgreen' 'byellow' 'bblue' 'bmagenta' 'bcyan' 'bwhite'
+        'background'     'foreground'
+       )
+
+for i in {0..17}; do
+    if [[ ${names[$i]} == $2 ]]; then
+        if [[ $2 == 'background' || $2 == 'foreground' ]]; then
+            color=$(xgetres ${2})
+        else
+            color=$(xgetres color${i})
+        fi
+        case $1 in
+            '-c')
+                    printf $color | xclip -selection c && \
+
+                    dunstify -u low "Copied Color" \
+                    "<span color='${color}'>${color}\n</span><span bgcolor='$color'>${color}</span>"
+                    ;;
+
+            '-s')
+                    dunstify -u low "Color" \
+                    "<span color='${color}'>${color}\n</span><span bgcolor='$color'>${color}</span>"
+                    printf "$(tput setaf $i)${color}$(tput sgr0)\n"
+                    printf "$(tput setab $i)${color}$(tput sgr0)\n"
+                    ;;
+
+        esac
+        break
+    fi
+done
