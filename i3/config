@@ -59,7 +59,7 @@ font pango: FontAwesome 10, Iosevka 12
 # windowtitles
 for_window [class=".*"] title_format "<b>%title</b>"
 
-#                       border      background  text        indca	child_border
+# colors                border      background  text        indca       child_border 
 client.focused          $byellow    $byellow    $background $magenta    $byellow
 client.focused_inactive $background $black      $background $background $background
 client.unfocused        $background $black      $background $background $background
@@ -213,10 +213,11 @@ set $ws6 "5:<b>6</b>"
 
 # Spotify
 for_window [class="Spotify"] move to workspace $ws2
-for_window [class="spotify"] move to workspace $ws2
 
 # Firefox
 assign [class="firefox"] $ws3
+
+# Steam
 assign [class="Steam"] $ws4
 
 # TeamSpeak
