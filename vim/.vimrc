@@ -85,4 +85,8 @@ set statusline+=%1*[%v]\ %*     " column
 
 " }}}
 
+let &t_EI = "\<Esc>[2 q"
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+
 " vim:foldmethod=marker

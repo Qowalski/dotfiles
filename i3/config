@@ -226,6 +226,9 @@ for_window [class="TeamSpeak 3"] move to workspace $ws5
 # Thunar
 for_window [class="Thunar"] floating enable border normal
 
+# Keepass
+for_window [class="KeePass2"] floating enable broder normal
+
 # }}}
 
 # Bar {{{
