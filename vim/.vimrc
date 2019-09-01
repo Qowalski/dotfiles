@@ -5,6 +5,17 @@
 " (_)_/ |_|_| |_| |_|_|  \___|
 "
 
+" Plugins {{{
+
+call plug#begin('~/.vim/plugs')
+Plug 'tpope/vim-surround'
+Plug 'ublevable/quick-scope'
+call plug#end()
+
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" }}}
+
 " Colors {{{
 
 " global
@@ -29,8 +40,7 @@ hi Comment ctermfg=245
 hi VertSplit ctermbg=232 ctermfg=7
 
 " statusline
-hi StatusLine ctermbg=7 ctermfg=7
-hi StatusLineNC ctermbg=7 ctermfg=7
+hi StatusLine ctermbg=232 ctermfg=7
 
 " }}}
 
@@ -70,18 +80,18 @@ set incsearch
 set laststatus=2
 set statusline=
 
-set statusline+=%1*\ %*         " initial space
+set statusline+=%1*\ %*             " initial space
 
-set statusline+=%1*[%n]\ %*      " buffer number
-set statusline+=%1*[%<%F]\ %*   " full path
-set statusline+=%1*[%{&ff}]\ %* " file format
-set statusline+=%1*%y\ %*       " file type
-set statusline+=%2*%m%r%*       " modified / read-only flag
+" set statusline+=%1*[%n]\ %*       " buffer number
+set statusline+=%1*%<%F\ %*         " full path
+" set statusline+=%1*[%{&ff}]\ %*   " file format
+set statusline+=%1*%y\ %*           " file type
+set statusline+=%2*%m%r%*           " modified / read-only flag
 
-set statusline+=%1*%=%*         " start to align right
+set statusline+=%1*%=%*             " start to align right
 
-set statusline+=%1*[%l/%L]\ %*  " line numbers
-set statusline+=%1*[%v]\ %*     " column
+set statusline+=%1*[%v\ \|\ %*      " column
+set statusline+=%1*%l/%L]\ %*       " line numbers
 
 " }}}
 

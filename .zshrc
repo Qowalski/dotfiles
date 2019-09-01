@@ -97,11 +97,12 @@ alias usb='cd /run/media/ && echo "cd -- media"'
 
 # }}}
 
-# Vi-mode {{{
-
 export PATH=$PATH:$HOME/.scripts/
 export PATH=$PATH:$HOME/.scripts/i3/
 export PATH=$PATH:$HOME/.scripts/dmenu/
+export PATH=$PATH:$HOME/.scripts/games/
+
+# Vi-mode {{{
 
 function zle-keymap-select zle-line-init zle-line-finish {
     case $KEYMAP in
