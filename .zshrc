@@ -79,6 +79,7 @@ alias rm='rm -i'
 alias rmm='rm -rI'
 alias musb='mount /dev/sdd1 && echo "mounted sdd1 -> /run/media"'
 alias umusb='umount /dev/sdd1 && echo "unmounted sdd1"'
+alias v='vim'
 
 # vim aliases. because it happens..
 alias ":q"='exit'
@@ -97,10 +98,12 @@ alias usb='cd /run/media/ && echo "cd -- media"'
 
 # }}}
 
+# Path's {{{
 export PATH=$PATH:$HOME/.scripts/
 export PATH=$PATH:$HOME/.scripts/i3/
 export PATH=$PATH:$HOME/.scripts/dmenu/
 export PATH=$PATH:$HOME/.scripts/games/
+# }}}
 
 # Vi-mode {{{
 
@@ -122,7 +125,9 @@ zle -N zle-keymap-select
 
 # Prompt {{{
 
-PROMPT='%(!.%{$fg[red]%}.%{$fg_bold[black]%}%n %{$fg_bold[blue]%})%~ $(git_prompt_info)%{$fg_bold[black]%}>%{$reset_color%} '
+# PROMPT='%(!.%{$fg[red]%}.%{$fg_bold[black]%}%n %{$fg_bold[blue]%})%~ $(git_prompt_info)%{$fg_bold[black]%}>%{$reset_color%} '
+PROMPT='%(!.%{$fg[red]%}.%B%{$fg[blue]%})%. %{$fg[white]%}$%{$reset_color%}%b '
+RPROMPT='$(git_prompt_info)%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}%{$fg_bold[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[blue]%}"
