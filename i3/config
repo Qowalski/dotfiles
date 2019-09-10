@@ -1,8 +1,8 @@
-#   _ _____ 
-#  (_)___ / 
-#  | | |_ \ 
+#   _ _____
+#  (_)___ /
+#  | | |_ \
 #  | |___) |
-#  |_|____/ 
+#  |_|____/
 #
 
 # Xresources {{{
@@ -54,18 +54,17 @@ default_floating_border normal
 default_border pixel 2
 
 # font
-set $font Iosevka
-set $font_fallback FontAwesome
-font pango: $font_fallback 10, $font 12
+font pango: FontAwesome 10, Iosevka 12
 
 # windowtitles
 for_window [class=".*"] title_format "<b>%title</b>"
+title_align center
 
-# colors                border      background  text        indca       child_border 
-client.focused          $background $background $byellow    $magenta    $byellow
-client.focused_inactive $background $black      $byellow    $background $background
-client.unfocused        $background $black      $white      $background $background
-client.urgent           $bred       $bred       $background $bred       $bred
+# colors                border background text        indca     child_border
+client.focused          $white $white     $background $bmagenta $blue
+client.focused_inactive $black $black     $white      $blue     $background
+client.unfocused        $black $black     $white      $blue     $background
+client.urgent           $bred  $bred      $background $bred     $bred
 
 # }}}
 
@@ -159,19 +158,22 @@ bindsym $mod1+$mod2+n move scratchpad
 # i3
 bindsym $mod1+$mod2+r restart
 
+# switch keyboard layout
+bindsym $mod1+$mod2+BackSpace exec --no-startup-id keyboard-switch
+
 # dmenu run
 bindsym $mod1+r exec --no-startup-id \
-                    dmenu_run -i -p run \
+                    dmenu_run -i -p "run" \
                     -fn "Iosevka-13"  -y 1 \
-                    -nb "$background" -nf "$foreground" \
-                    -sb "$byellow"    -sf "$background"
+                    -nb "$black"  -nf "$white" \
+                    -sb "$bblack" -sf "$black"
 
 # dmenu lutris
 bindsym $mod1+$mod2+g exec --no-startup-id \
                     lutris-dmenu -i -p lutris \
                     -fn "Iosevka-13"  -y 1\
-                    -nb "$background" -nf "$foreground" \
-                    -sb "$bblue"      -sf "$background"
+                    -nb "$black" -nf "$foreground" \
+                    -sb "$bblue" -sf "$background"
 
 # terminal
 bindsym $mod1+Return exec --no-startup-id st
@@ -186,11 +188,13 @@ bindsym $mod1+$mod2+m exec --no-startup-id spotify
 bindsym XF86AudioMute exec --no-startup-id pulsemixer --toggle-mute
 
 # volume up
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +5 \
+bindsym XF86AudioRaiseVolume exec --no-startup-id \
+                                pulsemixer --change-volume +5 \
                                 && notification volume
 
 # volume down
-bindsym XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -5 \
+bindsym XF86AudioLowerVolume exec --no-startup-id \
+                                pulsemixer --change-volume -5 \
                                 && notification volume
 
 # next song
@@ -244,41 +248,36 @@ for_window [class="Wine"] move workspace $ws5
 # Bar {{{
 
 bar {
-    status_command i3status
+    i3bar_command i3bar
+    status_command i3blocks
     position top
 
     workspace_buttons yes
-    tray_output primary
-    tray_padding 0
+    tray_output none
+    tray_padding -10
 
     strip_workspace_numbers yes
     strip_workspace_name no
 
-    separator_symbol "|"
+    separator_symbol "<"
 
     colors {
-        background $background
-        statusline $foreground
-        separator $byellow
+        background $black
+        statusline $bwhite
+        separator $white
 
-        #                   border      background  foreground
-        focused_workspace   $byellow    $byellow    $background
-        active_workspace    $white      $white      $background
-        inactive_workspace  $black      $black      $white
-        urgent_workspace    $bred       $bred       $background
-        binding_mode        $bamagenta  $bmagenta   $background
+        #                   border     background foreground
+        focused_workspace   $black     $black     $bblue
+        active_workspace    $black     $black     $bblue
+        inactive_workspace  $black     $black     $white
+        urgent_workspace    $black     $black     $bred
+        binding_mode        $bamagenta $bmagenta  $background
     }
 }
 
 # }}}
 
 # Autostart {{{
-
-# polybar
-# exec_always --no-startup-id \
-#     pgrep polybar \
-#     && killall -s USR1 polybar \
-#     || polybar left | polybar right
 
 # compton
 exec_always --no-startup-id \
@@ -287,18 +286,22 @@ exec_always --no-startup-id \
     || compton --config ~/.config/compton/config
 
 # dunst
-exec_always --no-startup-id killall dunst; dunst \
+exec_always --no-startup-id \
+    killall dunst; dunst \
     -geom "0x0-0+26" -fn "Iosevka 12" \
-    -lf  "$foreground" -nf  "$foreground" -cf  "$background" \
-    -lb  "$background" -nb  "$black"      -cb  "$bred" \
-    -lfr "$background" -nfr "$black"      -cfr "$bred"
+    -lf  "$white"    -nf  "$black"  -cf  "$background" \
+    -lb  "$black"    -nb  "$bblack" -cb  "$bred" \
+    -lfr "$black"    -nfr "$bblack" -cfr "$bred"
 
-## wallpaper
-exec_always --no-startup-id feh --bg-scale $HOME/pictures/wallpaper.png
+# wallpaper
+exec_always --no-startup-id \
+    feh --bg-scale $HOME/pictures/wallpapers/wallpaper.png
 
 # notifications
 exec --no-startup-id notification notes
 exec --no-startup-id notification updates
+exec --no-startup-id trsh --notify
+
 exec --no-startup-id thunar --daemon
 
 # MOVE THIS FUCKER ON ITS GOD DAMN PLACE!!!
@@ -306,4 +309,4 @@ exec --no-startup-id xdotool mousemove 960 540
 
 # }}}
 
-# vim:foldmethod=marker
+# vim:foldmethod=marker:ft=i3config
