@@ -1,0 +1,89 @@
+#!/bin/bash
+
+getItems() {
+    $(trashExist)
+    case $1 in
+        'items')
+            printf "$(ls -al ~/.trash | tail -n +4 | awk '{ print $9 }')"
+            ;;
+        'count')
+            printf "$(ls -al ~/.trash | tail -n +4 | awk 'END{ print NR }')"
+            ;;
+    esac
+}
+
+trashExist() {
+    [[ -d ~/.trash ]] \
+        || mkdir ~/.trash
+}
+
+case $1 in
+    '--empty')
+        items=$(getItems items)
+        count=$(getItems count)
+        if [[ ${count} -gt 0 ]]; then
+            while true; do
+                printf "Are you sure to \e[1;33mremove\e[0m "
+                printf "\e[1;31m${count}\e[m "
+                printf "items \e[1;31mpermanently\e[0m from ~/.trash? "
+                printf "y/n/l "
+                read user
+                case ${user} in
+                    'l')
+                        trsh --list
+                        ;;
+                    'n'|'')
+                        echo "canceld"
+                        break
+                        ;;
+                    'y')
+                        [[ ${user} == 'y' ]] \
+                            && rm -rf ~/.trash/* \
+                            && echo "Removed: ${count} items from ~/.trash" \
+                            && echo "${items}" \
+                            && break
+                        ;;
+                esac
+            done
+        else
+            echo "~/.trash is empty"
+        fi
+        ;;
+
+    '--list')
+        count=$(getItems count)
+        echo "${count} items in ~/.trash"
+        [[ ${count} -gt 0 ]] \
+            && echo "$(getItems items)"
+        ;;
+
+    '--notify')
+        dunstify \
+            "trsh" \
+            "Items in ~/.trash: $(getItems count)\n$(getItems items)"
+        ;;
+
+    ''|'--help')
+        echo "usage: trsh [file] || [command]"
+        echo "commands:"
+        echo "  --empty       remove everything from ~/.trash"
+        echo "  --list        list items in ~/.trash"
+        echo "  --notify      sends a notification about the ~/.trash state"
+        echo "  --help        prints this message"
+        ;;
+
+    *)
+        $(trashExist)
+        file="$(pwd)/${1}"
+        if [[ -f ${file} ]] || [[ -d ${file} ]]; then
+            printf "Are you sure to \e[1;33mremove\e[0m "
+            printf "'\e[1;31m${file}\e[0m'? "
+            read user
+            [[ ${user} == "y" ]] \
+                && mv ${file} ~/.trash \
+                && echo -e "moved '\e[1;31m${1}\e[0m' to ~/.trash"
+        else
+            echo -e "'\e[1;31m${file}\e[0m' does not exist"
+        fi
+    ;;
+esac
