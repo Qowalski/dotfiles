@@ -86,7 +86,7 @@
     " Disbale automatic commenting on new line
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-    " Delte all trailing whitespace when saved
+    " Delete all trailing whitespace when saved
     autocmd BufwritePre * %s/\s\+$//e
 
 " }}}
@@ -134,11 +134,6 @@
 " }}}
 
 " Statusline {{{
-
-" Colors {{{
-
-
-" }}}
 
 " Mode Map {{{
 
