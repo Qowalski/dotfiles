@@ -1,1 +1,0 @@
-/home/talkie/.bash_profile
