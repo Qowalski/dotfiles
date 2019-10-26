@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+
+
+import os
+import subprocess
+import argparse
+
+
+_NAME = os.path.basename(__file__)
+IGNORE = [_NAME, '.stowignore']
+
+if os.path.exists('.stowignore'):
+    with open('.stowignore') as stowignore:
+        for file in stowignore.readlines():
+            IGNORE.append(file.strip())
+
+
+def main():
+    parser = argparse.ArgumentParser(prog=_NAME)
+
+    parser.add_argument(
+        '--target',
+        '-t',
+        default=os.path.expanduser('~'),
+        help='specify target directory'
+    )
+
+    args = parser.parse_args()
+
+    if not os.path.exists(args.target):
+        exit('error: target does not exist')
+
+    files = [file for file in os.listdir() if file not in IGNORE]
+
+    print('STOW:\n{}\n'.format(' '.join(files)))
+    print('IGNORE:\n{}\n'.format(' '.join(IGNORE)))
+    print('TARGET:\n{}\n'.format(args.target))
+    user = input('[y/n] ').strip().lower()
+
+    if user == 'y':
+        for file in files:
+            subprocess.Popen(['stow', file, '-t', args.target])
+        print('done')
+    else:
+        print('cancled')
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (KeyboardInterrupt, EOFError):
+        exit(0)
