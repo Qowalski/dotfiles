@@ -1,0 +1,40 @@
+#!/bin/python
+
+from subprocess import check_output, call
+from json import loads
+
+
+class ToggleBorder:
+    tree = loads(check_output(["i3-msg", "-t", "get_tree"]).decode("utf-8"))
+    focus = None
+
+    @classmethod
+    def __init__(cls, pixel=None):
+        cls._getFocus(cls.tree)
+
+        floating = cls.focus['floating']
+        if floating == "user_on" or floating == "auto_on":
+            call(["i3-msg", "-q", "border", "normal"])
+        elif floating == "user_off" or floating == "auto_off":
+            if not pixel:
+                call(["i3-msg", "-q", "border", "pixel"])
+            else:
+                call(["i3-msg", "-q", "border", "pixel", str(pixel)])
+
+    @classmethod
+    def _getFocus(cls, tree):
+        for node in tree['nodes']:
+            if node['focused']:
+                cls.focus = node
+            else:
+                cls._getFocus(node)
+
+        for node in tree['floating_nodes']:
+            if node['focused']:
+                cls.focus = node
+            else:
+                cls._getFocus(node)
+
+
+if __name__ == "__main__":
+    ToggleBorder(pixel=2)
