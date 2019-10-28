@@ -1,6 +1,6 @@
-.git
-.gitignore
+.*
 README.md
-wallpaper.png
-stowme.sh
+*.png
+*.sh
 stowme
+screenshots
