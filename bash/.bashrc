@@ -75,8 +75,11 @@ alias gstash='git stash'
 alias gcheckout='git checkout'
 alias gswitch='git switch'
 alias gbranch='git branch'
+alias gpull='git pull'
+alias gpush='gpush'
 
 # vim aliases. because it happens..
+alias ":w"='echo -e "\e[1;30;41mThis is not VIM!\e[m"'
 alias ":q"='exit'
 alias ":wq"='exit'
 alias ":Q"='echo -e "\e[1;30;41mE498: Not an editor command: Q\e[m"'
@@ -88,22 +91,6 @@ alias .s='cd $HOME/.scripts/ && echo "cd -- .scripts"'
 alias dl='cd $HOME/downloads/ && echo "cd -- downloads"'
 alias dm='cd $HOME/documents/ && echo "cd -- documents"'
 alias pt='cd $HOME/pictures/ && echo "cd -- pictures"'
-
-# pandoc
-alias pansoc='pandoc -so'
-
-# configs
-alias csxhkd='${EDITOR} ~/.config/sxhkd/sxhkdrc'
-alias cbspwm='${EDITOR} ~/.config/bspwm/bspwmrc'
-alias ci3='${EDITOR} ~/.config/i3/config'
-alias ci3blocks='${EDITOR} ~/.config/i3blocks/config'
-alias ccompton='${EDITOR} ~/.config/compton/config'
-alias cpolybar='${EDITOR} ~/.config/polybar/config'
-
-# tmux
-tmux() {
-    env TERM=tmux tmux -2 $@
-}
 
 
 ## }}}
