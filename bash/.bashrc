@@ -115,9 +115,7 @@ PS2='\[\e[1;33m\]\$ \[\e[m\]'
 ## }}}
 ## Path's        |{{{
 
-export PATH=$PATH:$HOME/.scripts/
-export PATH=$PATH:$HOME/.scripts/i3/
-export PATH=$PATH:$HOME/.scripts/dmenu/
+export PATH=$PATH:$HOME/.scripts
 
 
 ## }}}
