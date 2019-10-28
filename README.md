@@ -13,6 +13,6 @@ Configurations will probably change often.
   * If target (-t, --target) is not set it will get set to ~ (/home/\<user\>).
   * If used wihout any arguments or without -S, -D or -R it stows all configs.
 
-![left monitor](left.png)
+![left monitor](screenshots/left.png)
 
-![right monitor](right.png)
+![right monitor](screenshots/right.png)
