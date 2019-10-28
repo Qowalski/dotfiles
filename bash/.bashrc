@@ -9,17 +9,10 @@
 
 ## General       |{{{
 export TERMINAL="st"
-export EDITOR="emacs"
+export EDITOR="vim"
 export BROWSER="firefox"
-export ATERNATE_EDITOR="vim"
 export LANG="en_US"
 export PROMPT_DIRTRIM=3
-
-if [[ $TMUX != '' ]]; then
-    export INPUTRC=~/.tmux.inputrc
-else
-    export INPUTRC=~/.inputrc
-fi
 
 
 ## }}}
