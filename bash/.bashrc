@@ -112,13 +112,16 @@ tmux() {
 if [ -d /usr/share/git/ ]; then
     source /usr/share/git/git-prompt.sh
     source /usr/share/git/completion/git-completion.bash
+
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    GIT_PS1_SHOWCOLORHINTS=1
+
+    PROMPT_COMMAND='__git_ps1 "\[\e[1;34m\]\w\[\e[m\]" " \[\e[1;33m\]$(__job_count)\[\e[m\] "'
+else
+    PS1='\[\e[1;34m\]\w \[\e[1;33m\]$(__job_count)\[\e[m\] '
 fi
 
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWCOLORHINTS=1
-
-PROMPT_COMMAND='__git_ps1 "\[\e[1;34m\]\w\[\e[m\]" " \[\e[1;33m\]$(__job_count)\[\e[m\] "'
 PS2='\[\e[1;33m\]\$ \[\e[m\]'
 
 
