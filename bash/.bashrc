@@ -76,7 +76,7 @@ alias gcheckout='git checkout'
 alias gswitch='git switch'
 alias gbranch='git branch'
 alias gpull='git pull'
-alias gpush='gpush'
+alias gpush='git push'
 
 # vim aliases. because it happens..
 alias ":w"='echo -e "\e[1;30;41mThis is not VIM!\e[m"'
