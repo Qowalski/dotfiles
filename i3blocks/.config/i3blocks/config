@@ -11,6 +11,18 @@ separator_block_width=30
 markup=pango
 align=center
 
+[wifi]
+command=~/.config/i3blocks/i3wifi
+interval=5
+
+[cpu]
+command=echo "<i><span color='$(xgetres color8)'>$(lscpu | awk '/CPU MHz/ {print $3}') MHz</span></i>"
+interval=3
+
+[battery]
+command=[[ -f /usr/bin/acpi ]] && ~/.config/i3blocks/i3battery
+interval=5
+
 [keyboard]
 command=echo "<i><span color='$(xgetres color4)'>$(setxkbmap -query | awk '/layout/ { print $2 }')</span></i>"
 interval=1
