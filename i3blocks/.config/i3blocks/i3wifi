@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+CONNECTION=$(nmcli -g CONNECTION,STATE d | awk -F: '/:connected/ {print $1}')
+
+if [[ ${CONNECTION} == "" ]]; then
+    echo "<b><span color='$(xgetres color1)'>NO WIFI</span></b>"
+else
+    echo "<i><span color='$(xgetres color2)'>${CONNECTION}</span></i>"
+fi
