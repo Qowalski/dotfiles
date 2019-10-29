@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mapfile -d " " -t battery < <(acpi | sed 's/Bat.*:\ //g; s/,//g')
+mapfile -d " " -t battery < <(acpi | sed 's/Bat.*:\ //g; s/,//g' | tr -d "\n")
 
 CAPACITY="<i>${battery[1]}</i>"
 
