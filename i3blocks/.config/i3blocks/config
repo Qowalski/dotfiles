@@ -12,7 +12,7 @@ markup=pango
 align=center
 
 [wifi]
-command=~/.config/i3blocks/i3wifi
+command=[[ -n $(nmcli d wifi list) ]] && ~/.config/i3blocks/i3wifi
 interval=5
 
 [cpu]
