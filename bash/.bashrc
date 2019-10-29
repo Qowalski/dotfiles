@@ -35,6 +35,10 @@ colors() {
     printf "\e[37m└───────┴───────┘\e[m\n"
 }
 
+c(){
+    awk "BEGIN { print $* }"
+}
+
 __job_count() {
     count=$(jobs | wc -l)
     [[ ${count} -gt 0 ]] \
