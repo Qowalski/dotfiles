@@ -1,0 +1,22 @@
+#  _ _____ _     _            _
+# (_)___ /| |__ | | ___   ___| | _____
+# | | |_ \| '_ \| |/ _ \ / __| |/ / __|
+# | |___) | |_) | | (_) | (__|   <\__ \
+# |_|____/|_.__/|_|\___/ \___|_|\_\___/
+#
+
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator=true
+separator_block_width=30
+markup=pango
+align=center
+
+[keyboard]
+command=echo "<i><span color='$(xgetres color4)'>$(setxkbmap -query | awk '/layout/ { print $2 }')</span></i>"
+interval=1
+
+[date_time]
+command=echo "<i><span color='$(xgetres color8)'>$(date "+%R") </span></i>"
+interval=5
+
+# vim:ft=dosini
