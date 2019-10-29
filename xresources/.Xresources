@@ -7,8 +7,6 @@
 
 !! colorschemes
 #include "/home/talkie/.colorschemes/gruvbox-dark"
-! #include "/home/talkie/.colorschemes/gruvbox-light"
-! #include "/home/talkie/.colorschemes/sixarms"
 
 !! ST
 ! font
