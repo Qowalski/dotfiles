@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
-mapfile -t battery < <(acpi | tr " " "\n" | tail -n+3 | head -n-2 | sed 's/,//g')
+mapfile -d " " -t battery < <(acpi | sed 's/Bat.*:\ //g; s/,//g')
 
-STATE=""
 CAPACITY="<i>${battery[1]}</i>"
-TIME="<i><span color='$(xgetres color8)'>${battery[2]}</span></i>"
 
 case ${battery[0]} in
-    'Charging') STATE="<b><span color='$(xgetres color2)'>++</span></b>";;
+    'Charging') STATE="<b><span color='$(xgetres color3)'>++</span></b>";;
     'Discharging') STATE="<b><span color='$(xgetres color1)'>--</span></b>";;
+    'Full') STATE="<b><span color='$(xgetres color2)'>==</span></b>"
 esac
 
-echo "${STATE}${CAPACITY} ${TIME}"
+if [[ -n ${battery[3]} ]]; then
+    TIME=" <i><span color='$(xgetres color8)'>${battery[2]}</span></i>"
+else
+    TIME=""
+fi
+
+
+echo "${STATE}${CAPACITY}${TIME}"
