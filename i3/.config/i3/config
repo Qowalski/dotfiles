@@ -242,7 +242,7 @@ set $ws6 "6:<i><b>6</b></i>"
 
 # Steam
     assign [class="Steam"] $ws4
-    for_window [title="Steam Guard - Computer Authorization Required"] \
+    assign [title="Steam Guard - Computer Authorization Required"] \
         floating enable
 
 # TeamSpeak
@@ -251,12 +251,11 @@ set $ws6 "6:<i><b>6</b></i>"
 # Thunar
     for_window [class="Thunar"] floating enable border normal
 
-# Keepass
-    for_window [class="KeePass2"] floating enable border normal position center
+# Wine
+    assign [class="Wine"] $ws5
 
 # Games
     for_window [class="minecraft-launcher"] move workspace $ws5
-    for_window [class="Wine"] move workspace $ws5
 
 
 ## Rules        |}}}
