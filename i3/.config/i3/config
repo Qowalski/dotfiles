@@ -167,6 +167,10 @@ workspace_auto_back_and_forth yes
     bindsym $mod1+$mod2+BackSpace exec --no-startup-id \
         keyboard-switch
 
+    # Toggle Touchpad
+    bindsym $mod1+t exec --no-startup-id \
+        [[ $(uname -n) == "tanoie" ]] && toggletouch
+
     # dmenu
         # Font
         set $dmenu_fn "Iosevka-11"
@@ -176,8 +180,8 @@ workspace_auto_back_and_forth yes
             dmenu_run -i -p "run:" \
             -h 26 \
             -fn $dmenu_fn \
-            -nb "$black"  -nf "$bblack" \
-            -sb "$bcyan" -sf "$black"
+            -nb "$background"  -nf "$yellow" \
+            -sb "$black" -sf "$yellow"
 
         # pass
         bindsym $mod1+$mod2+p exec --no-startup-id \
@@ -298,14 +302,14 @@ exec_always --no-startup-id \
 # Dunst
 exec_always --no-startup-id \
     killall dunst; dunst \
-    -geom "0x0-1+23" -fn "Iosevka 12" \
+    -geom "0x0-1+26" -fn "Iosevka 12" \
     -lf  "$bwhite"    -nf  "$bwhite"  -cf  "$bwhite" \
     -lb  "$black"    -nb  "$black" -cb  "$red" \
     -lfr "$black"    -nfr "$black" -cfr "$red"
 
 # Background
 exec_always --no-startup-id \
-    hsetroot -solid "$background"
+    hsetroot -solid "$black"
 
 # focus primary display at startup
 exec --no-startup-id \

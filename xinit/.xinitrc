@@ -6,12 +6,16 @@
 
 #!/bin/bash
 
-# General       |{{{
+## General     |{{{
     [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+    if [[ $(uname -n) == "tanoie" ]]; then
+        toggletouch
+    fi
 
 
 # General       |}}}
-# Output        |{{{
+## Output      |{{{
     set_output() {
         output=${1}
         rate=${2}
@@ -40,3 +44,5 @@
 ## IO Settings |}}}
 
 exec i3
+
+# vim:ft=sh
