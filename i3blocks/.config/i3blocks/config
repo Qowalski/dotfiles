@@ -15,8 +15,12 @@ align=center
 command=[[ -n $(nmcli d wifi list) ]] && ~/.config/i3blocks/i3wifi
 interval=5
 
+[ram]
+command=echo "<i>RAM <span color='$(xgetres color8)'>$(free -h | awk '/Mem/ {print $3}')</span></i>"
+interval=3
+
 [cpu]
-command=echo "<i><span color='$(xgetres color8)'>$(lscpu | awk '/CPU MHz/ {print $3}') MHz</span></i>"
+command=echo "<i>CPU <span color='$(xgetres color8)'>$(lscpu | awk '/CPU MHz/ {print $3}') MHz</span></i>"
 interval=3
 
 [battery]
@@ -24,7 +28,7 @@ command=[[ -f /usr/bin/acpi ]] && ~/.config/i3blocks/i3battery
 interval=5
 
 [keyboard]
-command=echo "<i><span color='$(xgetres color4)'>$(setxkbmap -query | awk '/layout/ { print $2 }')</span></i>"
+command=echo "<i><span color='$(xgetres color4)'>$(setxkbmap -query | grep -oP 'layout\W*\K\w+')</span></i>"
 interval=1
 
 [date_time]
