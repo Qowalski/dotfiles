@@ -6,17 +6,37 @@
 
 #!/bin/bash
 
-# Resolution
-xrandr --output DisplayPort-1 --primary --mode 1920x1080 --rate 144
-xrandr --output HDMI-A-1 --mode 1920x1080 --rate 60
+# General       |{{{
+    [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-# settings
-mouse-settings
-setxkbmap us
-setxkbmap -option caps:escape
 
-# Xresources
-[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+# General       |}}}
+# Output        |{{{
+    set_output() {
+        output=${1}
+        rate=${2}
+        [[ ${3} == primary ]] && primary="--primary" || primary=""
 
-# Windowmanager
+        if [[ -n $(xrandr | grep -io ${1}) ]]; then
+            xrandr --output ${output} ${primary} --mode 1920x1080 --rate ${rate}
+        fi
+    }
+
+    # Desktop
+    set_output DisplayPort-1 144 primary
+    set_output HDMI-A-1 60
+
+    # Laptop
+    set_output eDP1 144 primary
+
+
+## Output      |}}}
+## IO Settings |{{{
+    mouse-settings
+    setxkbmap us
+    setxkbmap -option caps:escape
+
+
+## IO Settings |}}}
+
 exec i3
