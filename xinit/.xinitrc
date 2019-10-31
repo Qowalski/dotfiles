@@ -7,10 +7,10 @@
 #!/bin/bash
 
 ## General     |{{{
-    [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+    [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources &
 
     if [[ $(uname -n) == "tanoie" ]]; then
-        toggletouch
+        toggletouch &
     fi
 
 
@@ -22,23 +22,23 @@
         [[ ${3} == primary ]] && primary="--primary" || primary=""
 
         if [[ -n $(xrandr | grep -io ${1}) ]]; then
-            xrandr --output ${output} ${primary} --mode 1920x1080 --rate ${rate}
+            xrandr --output ${output} ${primary} --mode 1920x1080 --rate ${rate} &
         fi
     }
 
-    # Desktop
-    set_output DisplayPort-1 144 primary
-    set_output HDMI-A-1 60
-
-    # Laptop
-    set_output eDP1 144 primary
+    if [[ $(uname -n) == "tanoie" ]]; then
+        set_output eDP1 144 primary
+    elif [[ $(uname -n) == "tapcie" ]]; then
+        set_output DisplayPort-1 144 primary
+        set_output HDMI-A-1 60
+    fi
 
 
 ## Output      |}}}
 ## IO Settings |{{{
-    mouse-settings
-    setxkbmap us
-    setxkbmap -option caps:escape
+    mouse-settings &
+    setxkbmap us &
+    setxkbmap -option caps:escape &
 
 
 ## IO Settings |}}}
