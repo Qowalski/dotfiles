@@ -178,7 +178,7 @@ workspace_auto_back_and_forth yes
         # run
         bindsym $mod1+r exec --no-startup-id \
             dmenu_run -i -p "run:" \
-            -h 26 \
+            -h 27 \
             -fn $dmenu_fn \
             -nb "$background"  -nf "$yellow" \
             -sb "$black" -sf "$yellow"
@@ -190,6 +190,10 @@ workspace_auto_back_and_forth yes
             -fn $dmenu_fn \
             -nb "$black"  -nf "$bblack" \
             -sb "$bblue" -sf "$black" \
+
+    # Scrot
+    bindsym $mod1+$mod2+Return exec --no-startup-id \
+        screenshot -u
 
 # Audio
     # Toggle mute
@@ -246,7 +250,7 @@ set $ws6 "6:<i><b>6</b></i>"
         floating enable
 
 # TeamSpeak
-    for_window [class="TeamSpeak 3"] move to workspace $ws5
+    assign [class="TeamSpeak 3"] $ws5
 
 # Thunar
     for_window [class="Thunar"] floating enable border normal
@@ -301,7 +305,7 @@ exec_always --no-startup-id \
 # Dunst
 exec_always --no-startup-id \
     killall dunst; dunst \
-    -geom "0x0-1+26" -fn "Iosevka 12" \
+    -geom "0x0-1+28" -fn "Iosevka 12" \
     -lf  "$bwhite"    -nf  "$bwhite"  -cf  "$bwhite" \
     -lb  "$black"    -nb  "$black" -cb  "$red" \
     -lfr "$black"    -nfr "$black" -cfr "$red"
