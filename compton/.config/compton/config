@@ -1,0 +1,28 @@
+#                            _
+#   ___ ___  _ __ ___  _ __ | |_ ___  _ __
+#  / __/ _ \| '_ ` _ \| '_ \| __/ _ \| '_ \
+# | (_| (_) | | | | | | |_) | || (_) | | | |
+#  \___\___/|_| |_| |_| .__/ \__\___/|_| |_|
+#                     |_|
+
+# General {{{
+
+detect-client-opacity = true;
+detect-rounded-corners = true;
+vsync = true;
+refresh-rate = 0;
+backend = "glx";
+
+# }}}
+
+# Fading {{{
+
+fading = false;
+fade-delta = 6;
+fade-in-step = 0.08;
+fade-out-step = 0.08;
+no-fading-openclose = true;
+
+# }}}
+
+# vim:foldmethod=marker
