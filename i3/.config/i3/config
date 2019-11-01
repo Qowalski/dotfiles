@@ -35,193 +35,156 @@ set_from_resource   $foreground i3wm.foreground #c8c8c8
 ## Xresources   |}}}
 ## General      |{{{
 
-mouse_warping none
-focus_wrapping yes
-focus_follows_mouse no
-focus_on_window_activation smart
+mouse_warping                   none
+focus_wrapping                  yes
+focus_follows_mouse             no
+focus_on_window_activation      smart
 
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth   yes
 
 
 ## General      |}}}
 ## Appearance   |{{{
 
-# Gaps
-    gaps inner 0
-    gaps outer 0
+gaps inner                      0
+gaps outer                      0
 
-# Borders
-    default_floating_border normal
-    default_border pixel 2
+default_floating_border         normal
+default_border                  pixel 2
 
-# Font
-    font pango: FontAwesome 10, Iosevka 12
+for_window [class=".*"]         title_format "<b>%title</b>"
+title_align                     left
 
-# Titles
-    for_window [class=".*"] title_format "<b>%title</b>"
-    title_align left
+font                            pango: FontAwesome 10, Iosevka 12
 
-# Colors
-    # name                  border      background  text        indca       child_border
-    client.focused          $black      $black      $background $magenta    $black
-    client.focused_inactive $bblack     $bblack     $background $background $background
-    client.unfocused        $bblack     $bblack     $background $background $background
-    client.urgent           $bred       $bred       $background $background $background
+# class                         border  background text        indca       child_border
+client.focused                  $black  $black     $background $magenta    $black
+client.focused_inactive         $bblack $bblack    $background $background $background
+client.unfocused                $bblack $bblack    $background $background $background
+client.urgent                   $bred   $bred      $background $background $background
 
 
 ## Appearance   |}}}
 ## Keybindings  |{{{
 
 # Modkeys
-    set $mod1 Mod4
-    set $mod2 Shift
-    set $mod3 Mod1
-    floating_modifier $mod1
+set $mod1                                               Mod4
+set $mod2                                               Shift
+set $mod3                                               Mod1
+floating_modifier                                       $mod1
 
 # Mouse
-    bindsym --release      button2       kill
-    bindsym --whole-window $mod1+button2 kill
+bindsym --release button2                               kill
+bindsym --whole-window $mod1+button2                    kill
 
 # i3
-    bindsym $mod1+$mod2+r restart
+bindsym $mod1+$mod2+r                                   restart
 
 # Focus
-    # Change
-    bindsym $mod1+h     focus left
-    bindsym $mod1+j     focus down
-    bindsym $mod1+k     focus up
-    bindsym $mod1+l     focus right
-    bindsym $mod1+space focus mode_toggle
+bindsym $mod1+h                                         focus left
+bindsym $mod1+j                                         focus down
+bindsym $mod1+k                                         focus up
+bindsym $mod1+l                                         focus right
+bindsym $mod1+space                                     focus mode_toggle
 
-    # Move inside workspace
-    bindsym $mod1+$mod2+h move left
-    bindsym $mod1+$mod2+j move down
-    bindsym $mod1+$mod2+k move up
-    bindsym $mod1+$mod2+l move right
+bindsym $mod1+$mod2+h                                   move left
+bindsym $mod1+$mod2+j                                   move down
+bindsym $mod1+$mod2+k                                   move up
+bindsym $mod1+$mod2+l                                   move right
 
-    # Move to workspace
-    bindsym $mod1+$mod2+1 move window to workspace $ws1 workspace $ws1
-    bindsym $mod1+$mod2+2 move window to workspace $ws2 workspace $ws2
-    bindsym $mod1+$mod2+3 move window to workspace $ws3 workspace $ws3
-    bindsym $mod1+$mod2+4 move window to workspace $ws4 workspace $ws4
-    bindsym $mod1+$mod2+5 move window to workspace $ws5 workspace $ws5
-    bindsym $mod1+$mod2+6 move window to workspace $ws6 workspace $ws6
+bindsym $mod1+$mod2+1                                   move window to workspace $ws1
+bindsym $mod1+$mod2+2                                   move window to workspace $ws2
+bindsym $mod1+$mod2+3                                   move window to workspace $ws3
+bindsym $mod1+$mod2+4                                   move window to workspace $ws4
+bindsym $mod1+$mod2+5                                   move window to workspace $ws5
+bindsym $mod1+$mod2+6                                   move window to workspace $ws6
 
-    # Move to next workspace on output
-    bindsym $mod2+$mod3+period \
-        move window to workspace next_on_output \
-        workspace next_on_output
+bindsym $mod2+$mod3+period                              move window to workspace \
+                                                        next_on_output workspace \
+                                                        next_on_output
 
-    # Move to previous workspace on output
-    bindsym $mod2+$mod3+comma \
-        move window to workspace prev_on_output \
-        workspace prev_on_output
+bindsym $mod2+$mod3+comma                               move window to workspace \
+                                                        prev_on_output workspace \
+                                                        prev_on_output
 
-    # Move to scratchpad
-    bindsym $mod1+n       scratchpad show
-    bindsym $mod1+$mod2+n move scratchpad
+bindsym $mod1+$mod2+n                                   move scratchpad
+bindsym $mod1+n                                         scratchpad show
 
-    # Resize
-    bindsym $mod1+y resize shrink width  10px or 2ppt
-    bindsym $mod1+i resize grow   height 10px or 2ppt
-    bindsym $mod1+u resize shrink height 10px or 2ppt
-    bindsym $mod1+o resize grow   width  10px or 2ppt
+set     $resize                                         10px or 2ppt
+bindsym $mod1+y                                         resize shrink width $resize
+bindsym $mod1+i                                         resize grow height $resize
+bindsym $mod1+u                                         resize shrink height $resize
+bindsym $mod1+o                                         resize grow width $resize
 
-    # Kill
-    bindsym $mod1+Shift+q kill
+bindsym $mod1+Shift+q                                   kill
 
-    # Split
-    bindsym $mod1+s split toggle
+bindsym $mod1+s                                         split toggle
 
-    # Layout
-    bindsym $mod1+f fullscreen toggle
-    bindsym $mod1+d layout toggle splith tabbed
-    bindsym $mod1+$mod2+space floating toggle
+bindsym $mod1+f                                         fullscreen toggle
+bindsym $mod1+d                                         layout toggle splith tabbed
+bindsym $mod1+$mod2+space                               floating toggle
+# Focus
 
 # Workspace
-    # Change
-    bindsym $mod1+1 workspace $ws1
-    bindsym $mod1+2 workspace $ws2
-    bindsym $mod1+3 workspace $ws3
-    bindsym $mod1+4 workspace $ws4
-    bindsym $mod1+5 workspace $ws5
-    bindsym $mod1+6 workspace $ws6
-    bindsym $mod1+period workspace next_on_output
-    bindsym $mod1+comma  workspace prev_on_output
+bindsym $mod1+1                                         workspace $ws1
+bindsym $mod1+2                                         workspace $ws2
+bindsym $mod1+3                                         workspace $ws3
+bindsym $mod1+4                                         workspace $ws4
+bindsym $mod1+5                                         workspace $ws5
+bindsym $mod1+6                                         workspace $ws6
 
-    # Move to output
-    bindsym $mod1+$mod2+comma  move workspace to output DisplayPort-1
-    bindsym $mod1+$mod2+period move workspace to output HDMI-A-1
+bindsym $mod1+period                                    workspace next_on_output
+bindsym $mod1+comma                                     workspace prev_on_output
 
-# Programs/Scripts
-    bindsym $mod1+Return exec --no-startup-id \
-        $TERMINAL
+bindsym $mod1+$mod2+comma                               move workspace to output \
+                                                        DisplayPort-1
+bindsym $mod1+$mod2+period                              move workspace to output \
+                                                        HDMI-A-1
 
-    bindsym $mod1+$mod2+b exec --no-startup-id \
-        $BROWSER
+bindsym $mod1+Return            exec --no-startup-id    $TERMINAL
+bindsym $mod1+$mod2+b           exec --no-startup-id    $BROWSER
+bindsym $mod1+$mod2+m           exec --no-startup-id    spotify
+bindsym $mod1+$mod2+BackSpace   exec --no-startup-id    keyboard-switch
+# Workspace
 
-    bindsym $mod1+$mod2+m exec --no-startup-id \
-        spotify
+# toggle touchpad (laptop)
+bindsym $mod1+t                 exec --no-startup-id    [[ $(uname -n) == "tanoie" ]] \
+                                                        && toggletouch
 
-    # Toggle keyboard layout
-    bindsym $mod1+$mod2+BackSpace exec --no-startup-id \
-        keyboard-switch
+# demnu run
+bindsym $mod1+r                 exec --no-startup-id    dmenu_run \
+                                                        -i \
+                                                        -p "run:" \
+                                                        -h 27 \
+                                                        -fn "Iosevka-11" \
+                                                        -nb "$background" \
+                                                        -nf "$yellow" \
+                                                        -sb "$black" \
+                                                        -sf "$yellow"
 
-    # Toggle Touchpad
-    bindsym $mod1+t exec --no-startup-id \
-        [[ $(uname -n) == "tanoie" ]] && toggletouch
+# dmenu pass
+bindsym $mod1+$mod2+p           exec --no-startup-id    passmenu \
+                                                        -i \
+                                                        -p "pass:" \
+                                                        -h 26 \
+                                                        -fn "Iosevka-11" \
+                                                        -nb "$black"  -nf "$bblack" \
+                                                        -sb "$bblue" -sf "$black" \
 
-    # dmenu
-        # Font
-        set $dmenu_fn "Iosevka-11"
-
-        # run
-        bindsym $mod1+r exec --no-startup-id \
-            dmenu_run -i -p "run:" \
-            -h 27 \
-            -fn $dmenu_fn \
-            -nb "$background"  -nf "$yellow" \
-            -sb "$black" -sf "$yellow"
-
-        # pass
-        bindsym $mod1+$mod2+p exec --no-startup-id \
-            passmenu -i -p "pass:" \
-            -h 26 \
-            -fn $dmenu_fn \
-            -nb "$black"  -nf "$bblack" \
-            -sb "$bblue" -sf "$black" \
-
-    # Scrot
-    bindsym $mod1+$mod2+Return exec --no-startup-id \
-        screenshot -u
+# Scrot
+bindsym $mod1+$mod2+Return      exec --no-startup-id    screenshot -u
 
 # Audio
-    # Toggle mute
-    bindsym XF86AudioMute exec --no-startup-id \
-        pulsemixer --toggle-mute
-
-    # Volume +
-    bindsym XF86AudioRaiseVolume exec --no-startup-id \
-        pulsemixer --change-volume +5 \
-        && notification volume
-
-    # Volume -
-    bindsym XF86AudioLowerVolume exec --no-startup-id \
-        pulsemixer --change-volume -5 \
-        && notification volume
+bindsym XF86AudioMute           exec --no-startup-id    pulsemixer --toggle-mute
+bindsym XF86AudioRaiseVolume    exec --no-startup-id    pulsemixer --change-volume +5 \
+                                                        && notification volume
+bindsym XF86AudioLowerVolume    exec --no-startup-id    pulsemixer --change-volume -5 \
+                                                        && notification volume
 
 # Media
-    # Next song
-    bindsym XF86AudioNext exec --no-startup-id \
-        playerctl next
-
-    # Previous song
-    bindsym XF86AudioPrev exec --no-startup-id \
-        playerctl previous
-
-    # Play/Pause
-    bindsym XF86AudioPlay exec --no-startup-id \
-        playerctl play-pause
+bindsym XF86AudioNext           exec --no-startup-id    playerctl next
+bindsym XF86AudioPrev           exec --no-startup-id    playerctl previous
+bindsym XF86AudioPlay           exec --no-startup-id    playerctl play-pause
 
 
 ## Keybindings  |}}}
@@ -238,57 +201,42 @@ set $ws6 "6:<i><b>6</b></i>"
 ## Workspaces   |}}}
 ## Rules        |{{{
 
-# Spotify
-    for_window [class="Spotify"] move to workspace $ws2
-
-# Firefox
-    assign [class="firefox"] $ws3
-
-# Steam
-    assign [class="Steam"] $ws4
-    assign [title="Steam Guard - Computer Authorization Required"] \
-        floating enable
-
-# TeamSpeak
-    assign [class="TeamSpeak 3"] $ws5
-
-# Thunar
-    for_window [class="Thunar"] floating enable border normal
-
-# Wine
-    assign [class="Wine"] $ws5
-
-# Games
-    for_window [class="minecraft-launcher"] move workspace $ws5
+assign [class="firefox"]                                $ws3
+assign [class="Steam"]                                  $ws4
+for_window [title=".*Steam Guard.*"]                    floating enable
+assign [class="TeamSpeak 3"]                            $ws5
+assign [class="Wine"]                                   $ws5
+assign [class="minecraft-launcher"]                     $ws5
+for_window [class="Spotify"]                            move to workspace $ws2
 
 
 ## Rules        |}}}
 ## Bar          |{{{
 
 bar {
-    i3bar_command i3bar --transparency
-    status_command i3blocks
-    position top
+    i3bar_command               i3bar --transparency
+    status_command              i3blocks
+    position                    top
 
-    workspace_buttons yes
-    tray_output none
-    tray_padding -10
+    workspace_buttons           yes
+    tray_output                 none
+    tray_padding                -10
 
-    strip_workspace_numbers yes
-    strip_workspace_name no
+    strip_workspace_numbers     yes
+    strip_workspace_name        no
 
-    separator_symbol "|"
+    separator_symbol            "|"
 
     colors {
-        background $background
-        statusline $bwhite
-        separator $bwhite
+        background              $background
+        statusline              $bwhite
+        separator               $bwhite
 
-        # name             border       background  foreground
-        focused_workspace  $black       $black      $yellow
-        active_workspace   $background  $background $yellow
-        inactive_workspace $background  $background $white
-        urgent_workspace   $background  $background $bred
+        # class                 border      background  foreground
+        focused_workspace       $black      $black      $yellow
+        active_workspace        $background $background $yellow
+        inactive_workspace      $background $background $white
+        urgent_workspace        $background $background $bred
     }
 }
 
@@ -297,28 +245,24 @@ bar {
 ## Autostart    |{{{
 
 # Compton
-exec_always --no-startup-id \
-    pgrep compton \
-    && killall -s USR1 compton \
-    || compton --config ~/.config/compton/config
+exec_always --no-startup-id     pgrep compton \
+                                && killall -s USR1 compton \
+                                || compton --config ~/.config/compton/config
 
 # Dunst
-exec_always --no-startup-id \
-    killall dunst; dunst \
-    -geom "0x0-1+28" -fn "Iosevka 12" \
-    -lf  "$bwhite"    -nf  "$bwhite"  -cf  "$bwhite" \
-    -lb  "$black"    -nb  "$black" -cb  "$red" \
-    -lfr "$black"    -nfr "$black" -cfr "$red"
+exec_always --no-startup-id     killall dunst; dunst \
+                                -geom "0x0-1+28" -fn "Iosevka 12" \
+                                -lf  "$bwhite"   -nf  "$bwhite" -cf  "$bwhite" \
+                                -lb  "$black"    -nb  "$black"  -cb  "$red" \
+                                -lfr "$black"    -nfr "$black"  -cfr "$red"
 
 # Background
-exec_always --no-startup-id \
-    hsetroot -solid "$black"
+exec_always --no-startup-id     hsetroot -solid "$black"
 
-# focus primary display at startup
-exec --no-startup-id \
-    xdotool mousemove 960 540 \
-    && xdotool mousedown 1 \
-    && xdotool mouseup 1
+# Focus primary display at startup
+exec        --no-startup-id     xdotool mousemove 960 540 \
+                                && xdotool mousedown 1 \
+                                && xdotool mouseup 1
 
 
 ## Autostart    |}}}
