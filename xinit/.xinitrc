@@ -37,8 +37,8 @@
 ## Output      |}}}
 ## IO Settings |{{{
     mouse-settings &
-    setxkbmap us &
-    setxkbmap -option caps:escape &
+    setxkbmap us
+    setxkbmap -option caps:escape
 
 
 ## IO Settings |}}}
