@@ -257,7 +257,8 @@ exec_always --no-startup-id     killall dunst; dunst \
                                 -lfr "$black"    -nfr "$black"  -cfr "$red"
 
 # Background
-exec_always --no-startup-id     hsetroot -solid "$black"
+# exec_always --no-startup-id     hsetroot -solid "$black"
+exec_always --no-startup-id     feh --bg-scale ~/.config/wallpaper/*.jpg
 
 # Focus primary display at startup
 exec        --no-startup-id     xdotool mousemove 960 540 \
