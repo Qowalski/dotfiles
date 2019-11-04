@@ -11,7 +11,6 @@
 export TERMINAL="st"
 export EDITOR="vim"
 export BROWSER="firefox"
-export LANG="en_US"
 export PROMPT_DIRTRIM=3
 
 
