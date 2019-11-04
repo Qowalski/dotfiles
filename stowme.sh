@@ -20,7 +20,7 @@ then
 fi
 
 IGNORE=$(cat .stowignore 2> /dev/null)
-HOME=~
+# HOME=~
 TARGET="-t ${HOME}"
 
 for arg in ${args[@]}; do
