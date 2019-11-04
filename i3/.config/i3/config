@@ -251,7 +251,7 @@ exec_always --no-startup-id     pgrep compton \
 
 # Dunst
 exec_always --no-startup-id     killall dunst; dunst \
-                                -geom "0x0-1+28" -fn "Iosevka 12" \
+                                -geom "0x0-0+28" -fn "Iosevka 12" \
                                 -lf  "$bwhite"   -nf  "$bwhite" -cf  "$bwhite" \
                                 -lb  "$black"    -nb  "$black"  -cb  "$red" \
                                 -lfr "$black"    -nfr "$black"  -cfr "$red"
