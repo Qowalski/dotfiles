@@ -1,6 +1,7 @@
 .*
 README.md
 *.png
+*.jpg
 *.sh
 stowme
 screenshots
