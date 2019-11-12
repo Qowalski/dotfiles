@@ -27,6 +27,10 @@ interval=3
 command=[[ -f /usr/bin/acpi ]] && ~/.config/i3blocks/i3battery
 interval=5
 
+[audio]
+command=~/.config/i3blocks/i3audio
+interval=1
+
 [keyboard]
 command=echo "<i><span color='$(xgetres color4)'>$(setxkbmap -query | grep -oP 'layout\W*\K\w+')</span></i>"
 interval=1

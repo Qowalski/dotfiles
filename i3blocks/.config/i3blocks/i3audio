@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+if [[ $(pulsemixer --get-mute) -eq 0 ]]; then
+    printf "<i><span color='$(xgetres color8)'>"
+    printf "$(pulsemixer --get-volume | cut -d' ' -f1)%%"
+    printf "</span></i>\n"
+else
+    printf "<b><span color='$(xgetres color1)'>"
+    printf "MUTED"
+    printf "</span></b>\n"
+fi
