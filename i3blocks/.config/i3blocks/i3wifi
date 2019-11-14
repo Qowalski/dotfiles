@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-mapfile -d: -t connection < <(nmcli -g ACTIVE,SSID,SIGNAL d wifi list | grep yes | tr "\n" ":")
+mapfile -d: -t connection < <(nmcli -g ACTIVE,SSID,SIGNAL d wifi | grep yes | tr -d "\n")
 
 if [[ -n ${connection[1]} ]]; then
     ssid="<i><span color='$(xgetres color2)'>${connection[1]}</span></i>"
-    signal="<i><span color='$(xgetres color8)'>${connection[2]}</span></i>"
+    signal="<i><span color='$(xgetres color8)'>${connection[2]}%</span></i>"
     echo "${ssid} ${signal}"
 else
     echo "<b><span color='$(xgetres color1)'>NO WIFI</span></b>"
