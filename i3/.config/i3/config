@@ -5,7 +5,7 @@
 #  |_|____/
 #
 
-## Xresources   |{{{
+## -- Xresources   |{{{
 
 # normal            name        resource        fallback
 set_from_resource   $black      i3wm.color0     #000000
@@ -32,8 +32,8 @@ set_from_resource   $background i3wm.background #373737
 set_from_resource   $foreground i3wm.foreground #c8c8c8
 
 
-## Xresources   |}}}
-## General      |{{{
+## -- Xresources   |}}}
+## -- General      |{{{
 
 mouse_warping                   none
 focus_wrapping                  yes
@@ -43,8 +43,8 @@ focus_on_window_activation      smart
 workspace_auto_back_and_forth   yes
 
 
-## General      |}}}
-## Appearance   |{{{
+## -- General      |}}}
+## -- Appearance   |{{{
 
 gaps inner                      0
 gaps outer                      0
@@ -64,13 +64,17 @@ client.unfocused                $bblack $bblack    $background $background $back
 client.urgent                   $bred   $bred      $background $background $background
 
 
-## Appearance   |}}}
-## Keybindings  |{{{
+## -- Appearance   |}}}
+## -- Keybindings  |{{{
 
 # Modkeys
-set $mod1                                               Mod4
-set $mod2                                               Shift
-set $mod3                                               Mod1
+# Alt -----> Mod1
+# Super ---> Mod3
+# Shift ---> shift
+# Control -> control
+
+set $mod1                                               Mod1
+set $mod2                                               shift
 floating_modifier                                       $mod1
 
 # Mouse
@@ -81,12 +85,14 @@ bindsym --whole-window $mod1+button2                    kill
 bindsym $mod1+$mod2+r                                   restart
 
 # Focus
+# move left
 bindsym $mod1+h                                         focus left
 bindsym $mod1+j                                         focus down
 bindsym $mod1+k                                         focus up
 bindsym $mod1+l                                         focus right
 bindsym $mod1+space                                     focus mode_toggle
 
+#
 bindsym $mod1+$mod2+h                                   move left
 bindsym $mod1+$mod2+j                                   move down
 bindsym $mod1+$mod2+k                                   move up
@@ -98,14 +104,6 @@ bindsym $mod1+$mod2+3                                   move window to workspace
 bindsym $mod1+$mod2+4                                   move window to workspace $ws4
 bindsym $mod1+$mod2+5                                   move window to workspace $ws5
 bindsym $mod1+$mod2+6                                   move window to workspace $ws6
-
-bindsym $mod2+$mod3+period                              move window to workspace \
-                                                        next_on_output workspace \
-                                                        next_on_output
-
-bindsym $mod2+$mod3+comma                               move window to workspace \
-                                                        prev_on_output workspace \
-                                                        prev_on_output
 
 bindsym $mod1+$mod2+n                                   move scratchpad
 bindsym $mod1+n                                         scratchpad show
@@ -187,8 +185,8 @@ bindsym XF86AudioPrev           exec --no-startup-id    playerctl previous
 bindsym XF86AudioPlay           exec --no-startup-id    playerctl play-pause
 
 
-## Keybindings  |}}}
-## Workspaces   |{{{
+## -- Keybindings  |}}}
+## -- Workspaces   |{{{
 
 set $ws1 "1:<i><b>1</b></i>"
 set $ws2 "2:<i><b>2</b></i>"
@@ -198,8 +196,8 @@ set $ws5 "5:<i><b>5</b></i>"
 set $ws6 "6:<i><b>6</b></i>"
 
 
-## Workspaces   |}}}
-## Rules        |{{{
+## -- Workspaces   |}}}
+## -- Rules        |{{{
 
 assign [class="firefox"]                                $ws3
 assign [class="Steam"]                                  $ws4
@@ -210,8 +208,8 @@ assign [class="minecraft-launcher"]                     $ws5
 for_window [class="Spotify"]                            move to workspace $ws2
 
 
-## Rules        |}}}
-## Bar          |{{{
+## -- Rules        |}}}
+## -- Bar          |{{{
 
 bar {
     i3bar_command               i3bar --transparency
@@ -241,8 +239,8 @@ bar {
 }
 
 
-## Bar          |}}}
-## Autostart    |{{{
+## -- Bar          |}}}
+## -- Autostart    |{{{
 
 # Compton
 exec_always --no-startup-id     pgrep compton \
@@ -266,6 +264,6 @@ exec        --no-startup-id     xdotool mousemove 960 540 \
                                 && xdotool mouseup 1
 
 
-## Autostart    |}}}
+## -- Autostart    |}}}
 
 # vim:foldmethod=marker:ft=i3config
