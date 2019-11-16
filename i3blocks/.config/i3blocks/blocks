@@ -1,0 +1,120 @@
+#!/usr/bin/env sh
+
+colorize() {
+    for arg in "${@}"; do
+        case ${arg} in
+            black) color="$(xgetres color0)";;
+            red) color="$(xgetres color1)";;
+            green) color="$(xgetres color2)";;
+            yellow) color="$(xgetres color3)";;
+            blue) color="$(xgetres color4)";;
+            magenta) color="$(xgetres color5)";;
+            cyan) color="$(xgetres color6)";;
+            white) color="$(xgetres color7)";;
+
+            bblack) color="$(xgetres color8)";;
+            bred) color="$(xgetres color9)";;
+            bgreen) color="$(xgetres color10)";;
+            byellow) color="$(xgetres color11)";;
+            bblue) color="$(xgetres color12)";;
+            bmagenta) color="$(xgetres color13)";;
+            bcyan) color="$(xgetres color14)";;
+            bwhite) color="$(xgetres color15)";;
+
+            italic)
+                special_b="<i>"
+                special_e="</i>"
+                ;;
+
+            bold)
+                special_b="<b>"
+                special_e="</b>"
+                ;;
+
+            *) string=${arg}
+        esac
+    done
+
+    printf "%s" "${special_b}"
+
+    if [ -n "${color}" ]; then
+        printf "<span color='%s'>%s</span>" "${color}" "${string}"
+    else
+        printf "%s" "${string}"
+    fi
+
+    printf "%s" "${special_e}"
+}
+
+date_time() {
+    cmd=$(date "+%R")
+    time=$(colorize bblack italic "${cmd}")
+    printf "%s \n" "${time}"
+}
+
+keyboard() {
+    cmd=$(setxkbmap -query | awk '/layout/ {print $2}')
+
+    if [ "$(xset q | awk '/Caps Lock/ {print $4}')" = "on" ]; then
+        layout=$(colorize red bold "${cmd}")
+    else
+        layout=$(colorize blue italic "${cmd}")
+    fi
+
+    printf "%s\n" "${layout}"
+}
+
+battery() {
+    echo "BATTERY"
+}
+
+wifi() {
+    [ -z "$(nmcli d wifi)" ] && return 1
+    echo "WIFI"
+}
+
+audio() {
+    if [ "$(pulsemixer --get-mute)" -eq 0 ]; then
+        cmd=$(pulsemixer --get-volume | cut -d' ' -f1)
+        volume=$(colorize italic bblack "${cmd}")
+        suffix=$(colorize italic bblack "%")
+        printf "%s%s\n" "${volume}" "${suffix}"
+    else
+        muted="$(colorize red bold "MUTED")"
+        printf "%s\n" "${muted}"
+    fi
+}
+
+ram() {
+    cmd=$(free -h | awk '/Mem/ {print $3}')
+    ram=$(colorize bblack italic "${cmd}")
+    prefix=$(colorize bwhite italic "RAM")
+    printf "%s %s\n" "${prefix}" "${ram}"
+}
+
+cpu() {
+    cmd=$(lscpu | awk '/CPU MHz/ {print $3}')
+    cpu=$(colorize bblack italic "${cmd}")
+    prefix=$(colorize bwhite italic "CPU")
+    printf "%s %s\n" "${prefix}" "${cpu}"
+}
+
+is_laptop() {
+    if [ -d /sys/module/battery ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+case $1 in
+    date_time) date_time;;
+    keyboard) keyboard;;
+    wifi) wifi;;
+    battery) is_laptop && battery;;
+    audio) audio;;
+    ram) is_laptop && ram;;
+    cpu) is_laptop && cpu;;
+    '') echo "ERROR: no arguments"; exit 1;;
+    *) echo "ERROR: invalid argument"; exit 1;;
+esac
