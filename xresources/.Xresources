@@ -12,8 +12,5 @@
 ! font
 st.font: Iosevka-13
 
-! transparency
-st.alpha: 1.00
-
 ! border
 st.borderpx: 60
