@@ -65,12 +65,36 @@ keyboard() {
 }
 
 battery() {
-    echo "BATTERY"
+    [ -z "$(command -v acpi)" ] && exit 1
+    set -- $(acpi | sed 's/Bat.*:\ //g; s/,//g')
+
+    case "${1}" in
+        Charging)
+            state="$(colorize bold yellow "++")";;
+        Discharging)
+            state="$(colorize bold red "--")";;
+        Full)
+            state="$(colorize bold green "==")";;
+    esac
+
+    load="$(colorize italic bblack "${2}")"
+    time="$(colorize italic bblack "${3}")"
+
+    printf "%s%s %s\n" "${state}" "${load}" "${time}"
 }
 
 wifi() {
-    [ -z "$(nmcli d wifi)" ] && return 1
-    echo "WIFI"
+    [ -z "$(nmcli d wifi)" ] && exit 1
+    set -- $(nmcli -g ACTIVE,SSID,SIGNAL d wifi | grep yes | tr ':' ' ')
+
+    if [ -n "${1}" ]; then
+        ssid="$(colorize italic green "${2}")"
+        signal="$(colorize italic bblack "${3}%")"
+        printf "%s %s\n" "${ssid}" "${signal}"
+    else
+        msg=$(colorize bold red "NO WIFI")
+        printf "%s\n" "${msg}"
+    fi
 }
 
 audio() {
@@ -115,6 +139,5 @@ case $1 in
     audio) audio;;
     ram) is_laptop && ram;;
     cpu) is_laptop && cpu;;
-    '') echo "ERROR: no arguments"; exit 1;;
-    *) echo "ERROR: invalid argument"; exit 1;;
+    ''|*) printf "ERROR\n";
 esac
