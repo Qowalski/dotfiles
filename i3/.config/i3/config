@@ -175,7 +175,8 @@
                                         [[ $(uname -n) == "tanoie" ]] && toggletouch
 
     # screenshot
-    bindsym $mod1+$mod2+Return      exec --no-startup-id    screenshot -u
+    bindsym $mod1+$mod2+Return      exec --no-startup-id    \
+                                        screenshot -p ~/pictures/screenshots -ud 0.5
 
     # demnu_run
     bindsym $mod1+r                 exec --no-startup-id    \
