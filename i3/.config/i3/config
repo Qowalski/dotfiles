@@ -289,10 +289,10 @@ bar {
 ## -- Bar          |}}}
 ## -- Autostart    |{{{
 
-    # compton
-    exec_always --no-startup-id     pgrep compton \
-                                    && killall -s USR1 compton \
-                                    || compton --config ~/.config/compton/config
+    # picom
+    exec_always --no-startup-id     pgrep picom \
+                                    && killall -s USR1 picom \
+                                    || picom --config ~/.config/picom/config
 
     # dunst
     exec_always --no-startup-id     killall dunst; dunst \
