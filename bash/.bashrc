@@ -62,7 +62,7 @@ stty -ixon
 alias ls='ls --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
-alias compton='compton --config $HOME/.config/compton/config'
+alias picom='picom --config $HOME/.config/picom/config'
 alias rm='rm -i'
 alias rmm='rm -rI'
 alias musb='mount /dev/sdd1 && echo "mounted sdd1 -> /run/media"'
