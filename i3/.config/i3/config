@@ -292,7 +292,7 @@ bar {
     # picom
     exec_always --no-startup-id     pgrep picom \
                                     && killall -s USR1 picom \
-                                    || picom --config ~/.config/picom/config
+                                    || picom
 
     # dunst
     exec_always --no-startup-id     killall dunst; dunst \
