@@ -23,6 +23,7 @@
             " syntax
             Plug 'mboughaba/i3config.vim'
             Plug 'calviken/vim-gdscript3'
+            Plug 'Yggdroot/indentLine'
 
             " colorschemes
             Plug 'morhetz/gruvbox'
