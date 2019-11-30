@@ -7,17 +7,19 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-## General       |{{{
+## Variables     |{{{
 export TERMINAL="st"
 export EDITOR="vim"
 export BROWSER="firefox"
 export PROMPT_DIRTRIM=3
 
 
-## }}}
-## Scripts       |{{{
+## Variables     |}}}
+## Functions     |{{{
 
 colors() {
+    # print terminal colors
+
     printf "\e[37m┌───────┬───────┐\e[m\n"
 
     for i in {0..7}; do
@@ -35,18 +37,30 @@ colors() {
 }
 
 c(){
+    # calculator
+
     awk "BEGIN { print $* }"
 }
 
-__job_count() {
-    count=$(jobs | wc -l)
-    [[ ${count} -gt 0 ]] \
-        && printf "${count}" \
-        || printf "$"
+__jc() {
+    # prints $, #, job count or # and job count
+    # used in prompt
+
+    count="$(jobs | wc -l)"
+    prefix="$"
+    if [ "${count}" -gt 0 ]; then
+        [ "$(whoami)" = "root" ] \
+            && printf "#%s" "${count}" \
+            || printf "%s" "${count}"
+    else
+        [ "$(whoami)" = "root" ] \
+            && printf "#" \
+            || printf "$"
+    fi
 }
 
 
-## }}}
+## Functions     |}}}
 ## Shell options |{{{
 
 shopt -s autocd
@@ -54,8 +68,11 @@ shopt -s cdspell
 shopt -s dirspell
 stty -ixon
 
+export HISTSIZE=5000
+export HISTFILESIZE=5000
 
-## }}}
+
+## Shell options |}}}
 ## Aliases       |{{{
 
 # commands
@@ -97,7 +114,7 @@ alias dm='cd $HOME/documents/ && echo "cd -- documents"'
 alias pt='cd $HOME/pictures/ && echo "cd -- pictures"'
 
 
-## }}}
+## Aliases       |}}}
 ## Prompts       |{{{
 
 if [ -d /usr/share/git/ ]; then
@@ -108,20 +125,20 @@ if [ -d /usr/share/git/ ]; then
     GIT_PS1_SHOWUNTRACKEDFILES=1
     GIT_PS1_SHOWCOLORHINTS=1
 
-    PROMPT_COMMAND='__git_ps1 "\[\e[1;34m\]\w\[\e[m\]" " \[\e[1;33m\]$(__job_count)\[\e[m\] "'
+    PROMPT_COMMAND='__git_ps1 "\[\e[1;34m\]\w\[\e[m\]" " \[\e[1;33m\]$(__jc)\[\e[m\] "'
 else
-    PS1='\[\e[1;34m\]\w \[\e[1;33m\]$(__job_count)\[\e[m\] '
+    PS1='\[\e[1;34m\]\w \[\e[1;33m\]$(__jc)\[\e[m\] '
 fi
 
 PS2='\[\e[1;33m\]\$ \[\e[m\]'
 
 
-## }}}
+## Prompts       |}}}
 ## Path's        |{{{
 
 export PATH=$PATH:$HOME/.scripts
 
 
-## }}}
+## Path's        |}}}
 
 # vim:foldmethod=marker
