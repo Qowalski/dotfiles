@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+# Script to change my wallpaper
+
+[ -z "$1" ] && { echo "First argument should be path to wallpaper"; exit 1; }
+
+# wallpaperpath
+w_path="$(realpath ~/.config/wallpaper)"
+
+# name of current wallpaper
+w_c="$(basename "$(find "${w_path}" | grep 'C_*')")"
+
+# full path, dirname and basename of new wallpaper
+n="$(realpath -s "$1")"
+n_path="$(dirname "$n")"
+n_name="$(basename "$n")"
+
+# check if new wallpaper exists
+[ -f "$n" ] || { echo "File does not exist"; exit 1; }
+
+# move new wallpaper to wallpaperpath
+if [ "$n_path" != "$w_path" ]; then
+    mv "$n" "${w_path}/${n_name}"
+fi
+
+# reaname files and set new wallpaper
+[ -n "$w_c" ] && mv "${w_path}/${w_c}" "${w_path}/${w_c#C_}"
+mv "${w_path}/${n_name}" "${w_path}/C_${n_name}"
+feh --bg-scale "${w_path}/C_${n_name}"
