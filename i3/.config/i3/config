@@ -59,11 +59,11 @@
 
     font                            pango: FontAwesome 10, Iosevka 12
 
-    # class                         border  background text        indca       child_border
-    client.focused                  $black  $black     $background $magenta    $black
-    client.focused_inactive         $bblack $bblack    $background $background $background
-    client.unfocused                $bblack $bblack    $background $background $background
-    client.urgent                   $bred   $bred      $background $background $background
+    # class                         border  background text indicator child_border
+    client.focused                  $blue   $blue    $white $green    $yellow
+    client.focused_inactive         $black  $black   $white $black    $background
+    client.unfocused                $yellow $yellow  $white $black    $background
+    client.urgent                   $green  $green   $white $green    $green
 
 
 ## -- Appearance   |}}}
@@ -124,10 +124,10 @@
 
     # resize
     set     $resize             10px or 2ppt
-    bindsym $mod1+y             resize shrink width $resize
-    bindsym $mod1+i             resize grow height $resize
+    bindsym $mod1+y             resize shrink width  $resize
+    bindsym $mod1+i             resize grow   height $resize
     bindsym $mod1+u             resize shrink height $resize
-    bindsym $mod1+o             resize grow width $resize
+    bindsym $mod1+o             resize grow   width  $resize
 
     # kill
     bindsym $mod1+Shift+q       kill
@@ -273,15 +273,15 @@ bar {
     separator_symbol            "|"
 
     colors {
-        background              $background
-        statusline              $bwhite
-        separator               $bwhite
+        background              $red
+        statusline              $blue
+        separator               $green
 
-        # class                 border      background  foreground
-        focused_workspace       $black      $black      $yellow
-        active_workspace        $background $background $yellow
-        inactive_workspace      $background $background $white
-        urgent_workspace        $background $background $bred
+        # class                 border background foreground
+        focused_workspace       $red   $red       $green
+        active_workspace        $red   $red       $blue
+        inactive_workspace      $red   $red       $yellow
+        urgent_workspace        $red   $red       $gree
     }
 }
 
@@ -302,7 +302,7 @@ bar {
                                     -lfr "$black"    -nfr "$black"  -cfr "$red"
 
     # wallpaper
-    exec_always --no-startup-id     feh --bg-scale ~/.config/wallpaper/wallpaper.jpg
+    exec_always --no-startup-id     feh --bg-scale ~/.config/wallpaper/C_*
 
     # focus primary display at startup
     exec        --no-startup-id     xdotool mousemove 960 540 \

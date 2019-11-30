@@ -1,0 +1,28 @@
+/* normal */
+*.color0:       #000000
+/* *.color1:       #101110 */
+*.color1:       #222322
+*.color2:       #5a7358
+*.color3:       #3b3c3a
+*.color4:       #5a5c58
+*.color5:       #80837d
+*.color6:       #acb0a9
+*.color7:       #dee4db
+
+/* bright */
+*.color8:       #000000
+*.color9:       #101110
+*.color10:      #222322
+*.color11:      #3b3c3a
+*.color12:      #5a5c58
+*.color13:      #80837d
+*.color14:      #acb0a9
+*.color15:      #dee4db
+
+/* special */
+*.background:   #000000
+/* *.foreground:   #dee4db */
+*.foreground:   #a89984
+*.cursorColor:  #FF92DF
+
+! vim:ft=xdefaults

@@ -18,7 +18,7 @@
 *.color14: #8ec07c
 *.color15: #ebdbb2
 
-!! speciag
+!! special
 ! *.background: #1d2021
 *.background: #000000
 *.foreground: #ebdbb2

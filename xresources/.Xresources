@@ -5,12 +5,14 @@
 !! (_)_/|_/_/   \___/____/\____/\__,_/_/   \___/\___/____/
 !!
 
-!! colorschemes
-#include "/home/talkie/.colorschemes/gruvbox-dark"
+/* colorschemes */
+/* #include "/home/talkie/.colorschemes/gruvbox-dark" */
+#include "/home/talkie/.colorschemes/monochrome"
+/* #include "/home/talkie/.colorschemes/dracula" */
 
-!! ST
-! font
+/* ST */
+/* font */
 st.font: Iosevka-13
 
-! border
+/* border */
 st.borderpx: 60
