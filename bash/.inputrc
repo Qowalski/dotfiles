@@ -1,6 +1,8 @@
 $include /etc/inputrc
 
 set editing-mode vi
+set completion-ignore-case on
+TAB: menu-complete
 
 $if mode=vi
     set enable-keypad on
@@ -10,6 +12,98 @@ $if mode=vi
 
     set keymap vi-command
     Control-l: clear-screen
+
+    # history {{{
+    "gg": beginning-of-history
+    "G": end-of-history
+    "?": reverse-search-history
+    "/": forward-search-history
+
+    # history }}}
+    # <word> {{{
+        # inner
+        "diw": "bdw"
+        "ciw": "bcw"
+        "yiw": "byw"
+
+        # outer
+        "daw": "BdW"
+        "caw": "BcW"
+        "yaw": "ByW"
+
+    # <word>}}}
+    # () {{{
+        # inner
+        "di(": "F(lmtf)d`t"
+        "ci(": "di(i"
+        "yi(": "F(lmtf)y`t%l"
+        "di)": "di("
+        "ci)": "ci("
+        "yi)": "yi("
+
+        # outer
+        "da(": "lF(df)"
+        "ca(": "da(i"
+        "ya(": "lF(yf)"
+        "da)": "da("
+        "ca)": "ca("
+        "ya)": "ya("
+
+    # () }}}
+    # {} {{{
+        # inner
+        "di{": "F{lmtf}d`t"
+        "ci{": "di{i"
+        "yi{": "F{lmtf}y`t%l"
+        "di}": "di{"
+        "ci}": "ci{"
+        "yi}": "yi{"
+
+        # outer
+        "da{": "lF{df}"
+        "ca{": "da{i"
+        "ya{": "lF{yf}"
+        "da}": "da{"
+        "ca}": "ca{"
+        "ya}": "ya{"
+
+    # {} }}}
+    # [] {{{
+        # inner
+        "di[": "F{lmtf}d`t"
+        "ci[": "di{i"
+        "yi[": "F{lmtf}y`t%l"
+        "di]": "di{"
+        "ci]": "ci{"
+        "yi]": "yi{"
+
+        # outer
+        "da[": "lF[df]"
+        "ca[": "da[i"
+        "ya[": "lF[yf]"
+        "da]": "da["
+        "ca]": "ca["
+        "ya]": "ya["
+
+    # {} }}}
+    # <> {{{
+        # inner
+        "di<": "F<lmtf>d`t"
+        "ci<": "di<i"
+        "yi<": "F<lmtf>y`t%l"
+        "di>": "di<"
+        "ci>": "ci<"
+        "yi>": "yi<"
+
+        # outer
+        "da<": "lF<df>"
+        "ca<": "da<i"
+        "ya<": "lF<yf>"
+        "da>": "da<"
+        "ca>": "ca<"
+        "ya>": "ya<"
+
+    # <> }}}
 
     set keymap vi-insert
     Control-l: clear-screen
