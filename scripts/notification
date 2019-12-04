@@ -1,0 +1,14 @@
+#!/bin/bash
+
+case $1 in
+    'volume')
+    	        volume="$(pulsemixer --get-volume | awk '{ print $1 }')"
+    	        color_volume="$(xgetres color2)"
+    	        [ "$volume" -gt 100 ] && color_volume="$(xgetres color7)"
+
+    	        play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga && {
+                    dunstify -u low -r 298745 "Volume $volume%" \
+                    "$(progressbar 30 "█" "<span color='$color_volume'>" \
+                    "<span color='$(xgetres color1)'>" $volume 150)"
+                };;
+esac

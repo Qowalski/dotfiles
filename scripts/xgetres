@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Get values from Xresources.
+
+if [ -n "$(command -v xrdb)" ]; then
+    xrdb -query | grep "${1}:" | awk '{print $2}'
+else
+    echo "Command 'xrdb' not found"
+fi

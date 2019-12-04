@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+
+dt_format="+%d-%m-%y_%H-%M-%S"
+
+# Some variables.
+date_time=$(date "${dt_format}")
+ext=".png"
+notify="dunstify -r 938475"
+
+has() {
+    # Checks if given command exists and prints an error message.
+    # Returns 0 on success, 1 otherwise.
+
+    if [ -z "$(command -v "${1}")" ]; then
+        printf "%s: NOT INSTALLED\n" "${1}"
+        return 1
+    fi
+
+    return 0
+}
+
+# Check if needed tools are installed.
+has "scrot"    || exit 1
+has "xdotool"  || exit 1
+has "dunstify" || notify="notify-send"
+
+# Get name of focused window.
+window=$(xdotool getwindowfocus getwindowname | tr ' ' '-')
+
+# Set path to file.
+path=${HOME}
+[ "${1}" = "-p" ] && { path=$(realpath -s "${2}"); shift 2; }
+
+# Construct full path/name and set notification message.
+name="${path}/${window}_${date_time}${ext}"
+msg="${name} saved."
+
+# Execute Scrot and send notification.
+scrot "${@}" "${name}" || msg="ERROR: scrot had an error"
+printf "%s\n" "${msg}"
+${notify} -i "${name}" "Screenshot" "${name}" 2>/dev/null
