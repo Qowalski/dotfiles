@@ -46,8 +46,8 @@
 ## -- General      |}}}
 ## -- Appearance   |{{{
 
-    gaps inner                      0
-    gaps outer                      0
+    # gaps inner                      0
+    # gaps outer                      0
 
     # borders
     default_floating_border         normal
@@ -151,6 +151,10 @@
     bindsym $mod1+4                                         workspace $ws4
     bindsym $mod1+5                                         workspace $ws5
     bindsym $mod1+6                                         workspace $ws6
+    bindsym $mod1+7                                         workspace $ws7
+    bindsym $mod1+8                                         workspace $ws8
+    bindsym $mod1+9                                         workspace $ws9
+    bindsym $mod1+0                                         workspace $ws10
 
     # go to next/previous on output
     bindsym $mod1+period                                    workspace next_on_output
@@ -185,10 +189,10 @@
                                         -p "run:" \
                                         -h 27 \
                                         -fn "Iosevka-11" \
-                                        -nb "$background" \
-                                        -nf "$yellow" \
+                                        -nb "$black" \
+                                        -nf "$blue" \
                                         -sb "$black" \
-                                        -sf "$yellow"
+                                        -sf "$green"
 
     # passmenu
     bindsym $mod1+$mod2+p           exec --no-startup-id    \
@@ -197,14 +201,23 @@
                                         -p "pass:" \
                                         -h 26 \
                                         -fn "Iosevka-11" \
-                                        -nb "$black"  -nf "$bblack" \
-                                        -sb "$bblue" -sf "$black" \
+                                        -nb "$black" \
+                                        -nf "$blue" \
+                                        -sb "$black" \
+                                        -sf "$green"
 
     # audio
     bindsym XF86AudioMute           exec --no-startup-id    \
                                         pulsemixer --toggle-mute
 
+    bindsym $mod1+F9                exec --no-startup-id    \
+                                        pulsemixer --toggle-mute
+
     bindsym XF86AudioRaiseVolume    exec --no-startup-id    \
+                                        pulsemixer --change-volume +5 \
+                                        && notification volume
+
+    bindsym $mod1+F7                exec --no-startup-id    \
                                         pulsemixer --change-volume +5 \
                                         && notification volume
 
@@ -212,10 +225,19 @@
                                         pulsemixer --change-volume -5 \
                                         && notification volume
 
+    bindsym $mod1+F6                exec --no-startup-id    \
+                                        pulsemixer --change-volume -5 \
+                                        && notification volume
+
     # media
     bindsym XF86AudioNext           exec --no-startup-id    playerctl next
+    bindsym $mod1+F8                exec --no-startup-id    playerctl next
+
     bindsym XF86AudioPrev           exec --no-startup-id    playerctl previous
+    bindsym $mod1+F5                exec --no-startup-id    playerctl previous
+
     bindsym XF86AudioPlay           exec --no-startup-id    playerctl play-pause
+    bindsym $mod1+F4                exec --no-startup-id    playerctl play-pause
 
 
 ## Scripts/Programs |}}}
@@ -224,12 +246,16 @@
 ## -- Keybindings  |}}}
 ## -- Workspaces   |{{{
 
-    set $ws1 "1:<i><b>1</b></i>"
-    set $ws2 "2:<i><b>2</b></i>"
-    set $ws3 "3:<i><b>3</b></i>"
-    set $ws4 "4:<i><b>4</b></i>"
-    set $ws5 "5:<i><b>5</b></i>"
-    set $ws6 "6:<i><b>6</b></i>"
+    set $ws1  "1:<i>I</i>"
+    set $ws2  "2:<i>II</i>"
+    set $ws3  "3:<i>III</i>"
+    set $ws4  "4:<i>IV</i>"
+    set $ws5  "5:<i>V</i>"
+    set $ws6  "6:<i>VI</i>"
+    set $ws7  "6:<i>VII</i>"
+    set $ws8  "6:<i>VIII</i>"
+    set $ws9  "6:<i>IX</i>"
+    set $ws10 "6:<i>X</i>"
 
 
 ## -- Workspaces   |}}}
@@ -296,10 +322,10 @@ bar {
 
     # dunst
     exec_always --no-startup-id     killall dunst; dunst \
-                                    -geom "0x0-0+28" -fn "Iosevka 12" \
-                                    -lf  "$bwhite"   -nf  "$bwhite" -cf  "$bwhite" \
-                                    -lb  "$black"    -nb  "$black"  -cb  "$red" \
-                                    -lfr "$black"    -nfr "$black"  -cfr "$red"
+                                    -geom "0x0-28+28" -fn "Iosevka 12" \
+                                    -lf  "$blue" -nf  "$blue"   -cf  "$blue" \
+                                    -lb  "$red"  -nb  "$yellow" -cb  "$green" \
+                                    -lfr "$red"  -nfr "$yellow" -cfr "$green"
 
     # wallpaper
     exec_always --no-startup-id     feh --bg-scale ~/.config/wallpaper/C_*

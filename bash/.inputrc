@@ -22,27 +22,37 @@ $if mode=vi
     # history }}}
     # <word> {{{
         # inner
-        "diw": "bdw"
-        "ciw": "bcw"
-        "yiw": "byw"
+        "diw": "lbde"
+        "ciw": "lbce"
+        "yiw": "lbye"
 
         # outer
-        "daw": "BdW"
-        "caw": "BcW"
-        "yaw": "ByW"
+        "daw": "lbde"
+        "caw": "lbce"
+        "yaw": "lbye"
+
+        # whole inner
+        "diW": "lBdE"
+        "ciW": "lBcE"
+        "yiW": "lByE"
+
+        # whole outer
+        "daW": "lBdW"
+        "caW": "lBcW"
+        "yaW": "lByW"
 
     # <word>}}}
     # () {{{
         # inner
-        "di(": "F(lmtf)d`t"
+        "di(": "lT(dt)"
         "ci(": "di(i"
-        "yi(": "F(lmtf)y`t%l"
+        "yi(": "lT(yt)"
         "di)": "di("
         "ci)": "ci("
         "yi)": "yi("
 
         # outer
-        "da(": "lF(df)"
+        "da(": "lF(d%"
         "ca(": "da(i"
         "ya(": "lF(yf)"
         "da)": "da("
@@ -52,9 +62,9 @@ $if mode=vi
     # () }}}
     # {} {{{
         # inner
-        "di{": "F{lmtf}d`t"
+        "di{": "lT{dt}"
         "ci{": "di{i"
-        "yi{": "F{lmtf}y`t%l"
+        "yi{": "lT{yt}"
         "di}": "di{"
         "ci}": "ci{"
         "yi}": "yi{"
@@ -70,12 +80,12 @@ $if mode=vi
     # {} }}}
     # [] {{{
         # inner
-        "di[": "F{lmtf}d`t"
-        "ci[": "di{i"
-        "yi[": "F{lmtf}y`t%l"
-        "di]": "di{"
-        "ci]": "ci{"
-        "yi]": "yi{"
+        "di[": "lT[dt]"
+        "ci[": "di[i"
+        "yi[": "lT[yt]"
+        "di]": "di["
+        "ci]": "ci["
+        "yi]": "yi["
 
         # outer
         "da[": "lF[df]"
@@ -85,18 +95,18 @@ $if mode=vi
         "ca]": "ca["
         "ya]": "ya["
 
-    # {} }}}
+    # [] }}}
     # <> {{{
         # inner
-        "di<": "F<lmtf>d`t"
+        "di<": "lT<dt>"
         "ci<": "di<i"
-        "yi<": "F<lmtf>y`t%l"
+        "yi<": "lT<yt>"
         "di>": "di<"
         "ci>": "ci<"
         "yi>": "yi<"
 
         # outer
-        "da<": "lF<df>"
+        "da<": "lF<d>"
         "ca<": "da<i"
         "ya<": "lF<yf>"
         "da>": "da<"
@@ -104,6 +114,30 @@ $if mode=vi
         "ya>": "ya<"
 
     # <> }}}
+    # "" {{{
+        # inner
+        "di\"": "lT"dt""
+        "ci\"": "di"i"
+        "yi\"": "lT"yt""
+
+        # outer
+        "da\"": "lF"df""
+        "ca\"": "da"i"
+        "ya\"": "lF"yf""
+
+    # "" }}}
+    # '' {{{
+        # inner
+        "di'": "lT'dt'"
+        "ci'": "di'i"
+        "yi'": "lT'yt'"
+
+        # outer
+        "da'": "lF'df'"
+        "ca'": "da'i"
+        "ya'": "lF'yf'"
+
+    # '' }}}
 
     set keymap vi-insert
     Control-l: clear-screen
