@@ -109,6 +109,25 @@ audio() { # {{{
     fi
 } # }}}
 
+media() { # {{{
+    cmd_artist="$(playerctl metadata artist 2> /dev/null)"
+    cmd_title="$(playerctl metadata title 2> /dev/null)"
+
+    [ -z "$cmd_artist" ] && [ -z "$cmd_title" ] && {
+        exit 1
+    }
+
+    color="magenta"
+    [ "$(playerctl status)" = "Paused" ] && color="yellow"
+
+    artist="$(colorize italic "$color" "$cmd_artist")"
+    title="$(colorize italic "$color" "$cmd_title")"
+    sep="$(colorize italic "$color" "-")"
+
+    printf "%s %s %s\n" "$artist" "$sep" "$title"
+
+} # }}}
+
 ram() { # {{{
     cmd=$(free -h | awk '/Mem/ {print $3}')
     ram=$(colorize bblack italic "${cmd}")
@@ -137,7 +156,8 @@ case $1 in # {{{
     wifi) wifi;;
     battery) is_laptop && battery;;
     audio) audio;;
+    media) media;;
     ram) is_laptop && ram;;
     cpu) is_laptop && cpu;;
-    ''|*) printf "ERROR\n";
+    ''|*) printf "ERROR: '%s'\n" "$1";
 esac # }}}

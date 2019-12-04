@@ -11,6 +11,10 @@ separator_block_width=30
 markup=pango
 align=center
 
+[media]
+command=~/.config/i3blocks/blocks media
+interval=1
+
 [wifi]
 command=~/.config/i3blocks/blocks wifi
 interval=5
