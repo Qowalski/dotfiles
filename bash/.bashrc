@@ -79,11 +79,11 @@ export HISTFILESIZE=5000
 alias ls='ls --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
-alias picom='picom --config $HOME/.config/picom/config'
 alias rm='rm -i'
 alias rmm='rm -rI'
 alias musb='mount /dev/sdd1 && echo "mounted sdd1 -> /run/media"'
 alias umusb='umount /dev/sdd1 && echo "unmounted sdd1"'
+alias lsblk='lsblk -o MODEL,NAME,TYPE,FSTYPE,SIZE,MOUNTPOINT'
 
 # git
 alias ginit='git init'
