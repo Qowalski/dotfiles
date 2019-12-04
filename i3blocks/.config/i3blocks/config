@@ -31,9 +31,9 @@ interval=5
 command=~/.config/i3blocks/blocks battery
 interval=5
 
-[audio]
-command=~/.config/i3blocks/blocks audio
-interval=1
+# [audio]
+# command=~/.config/i3blocks/blocks audio
+# interval=1
 
 [keyboard]
 command=~/.config/i3blocks/blocks keyboard

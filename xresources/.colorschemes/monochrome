@@ -1,16 +1,44 @@
-/* normal */
-*.color0:       #000000
-/* *.color1:       #101110 */
-*.color1:       #222322
-*.color2:       #5a7358
-*.color3:       #3b3c3a
-*.color4:       #5a5c58
-*.color5:       #80837d
-*.color6:       #acb0a9
-*.color7:       #dee4db
+/* /1* normal *1/ */
+/* *.color0:       #000000 */
+/* /1* *.color1:       #101110 *1/ */
+/* /1* *.color1:       #222322 *1/ */
+/* *.color1:       #5f2322 */
+/* *.color2:       #5a7358 */
+/* *.color3:       #3b3c3a */
+/* *.color4:       #5a5c58 */
+/* *.color5:       #80837d */
+/* *.color6:       #acb0a9 */
+/* *.color7:       #dee4db */
 
-/* bright */
-*.color8:       #000000
+/* /1* bright *1/ */
+/* *.color8:       #000000 */
+/* *.color9:       #101110 */
+/* *.color10:      #222322 */
+/* *.color11:      #3b3c3a */
+/* *.color12:      #5a5c58 */
+/* *.color13:      #80837d */
+/* *.color14:      #acb0a9 */
+/* *.color15:      #dee4db */
+
+/* /1* special *1/ */
+/* *.background:   #000000 */
+/* /1* *.foreground:   #dee4db *1/ */
+/* *.foreground:   #a89984 */
+/* *.cursorColor:  #FF92DF */
+
+/* new */
+! normal
+*.color0:       #000000
+*.color1:       #5f2322
+*.color2:       #5a7358
+*.color3:       #222322
+*.color4:       #3b3c3a
+*.color5:       #5a5c58
+*.color6:       #80837d
+*.color7:       #acb0a9
+
+! bright
+*.color8:       #080808
 *.color9:       #101110
 *.color10:      #222322
 *.color11:      #3b3c3a
@@ -19,10 +47,9 @@
 *.color14:      #acb0a9
 *.color15:      #dee4db
 
-/* special */
-*.background:   #000000
-/* *.foreground:   #dee4db */
+! special
 *.foreground:   #a89984
-*.cursorColor:  #FF92DF
+*.background:   #000000
+*.cursorColor:  #a89984
 
 ! vim:ft=xdefaults

@@ -63,7 +63,7 @@
     client.focused                  $blue   $blue    $white $green    $yellow
     client.focused_inactive         $black  $black   $white $black    $background
     client.unfocused                $yellow $yellow  $white $black    $background
-    client.urgent                   $green  $green   $white $green    $green
+    client.urgent                   $red    $red     $white $red      $red
 
 
 ## -- Appearance   |}}}
@@ -305,15 +305,15 @@ bar {
     separator_symbol            "|"
 
     colors {
-        background              $red
+        background              $yellow
         statusline              $blue
         separator               $green
 
         # class                 border background foreground
-        focused_workspace       $red   $red       $green
-        active_workspace        $red   $red       $blue
-        inactive_workspace      $red   $red       $yellow
-        urgent_workspace        $red   $red       $gree
+        focused_workspace       $yellow   $yellow       $green
+        active_workspace        $yellow   $yellow       $magenta
+        inactive_workspace      $yellow   $yellow       $blue
+        urgent_workspace        $yellow   $yellow       $red
     }
 }
 
@@ -329,9 +329,9 @@ bar {
     # dunst
     exec_always --no-startup-id     killall dunst; dunst \
                                     -geom "0x0-28+28" -fn "Iosevka 12" \
-                                    -lf  "$blue" -nf  "$blue"   -cf  "$blue" \
-                                    -lb  "$red"  -nb  "$yellow" -cb  "$green" \
-                                    -lfr "$red"  -nfr "$yellow" -cfr "$green"
+                                    -lf  "$magenta" -nf  "$magenta"   -cf  "$magenta" \
+                                    -lb  "$yellow"  -nb  "$yellow" -cb  "$green" \
+                                    -lfr "$yellow"  -nfr "$yellow" -cfr "$green"
 
     # wallpaper
     exec_always --no-startup-id     feh --bg-scale ~/.config/wallpaper/C_*

@@ -118,7 +118,7 @@ media() { # {{{
     }
 
     color="magenta"
-    [ "$(playerctl status)" = "Paused" ] && color="yellow"
+    [ "$(playerctl status)" = "Paused" ] && color="blue"
 
     artist="$(colorize italic "$color" "$cmd_artist")"
     title="$(colorize italic "$color" "$cmd_title")"
