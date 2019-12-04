@@ -239,6 +239,12 @@
     bindsym XF86AudioPlay           exec --no-startup-id    playerctl play-pause
     bindsym $mod1+F4                exec --no-startup-id    playerctl play-pause
 
+    # laptop
+    bindsym XF86MonBrightnessUp     exec --no-startup-id    light -A 10 \
+                                                                && notification brightness
+    bindsym XF86MonBrightnessDown   exec --no-startup-id    light -U 10 \
+                                                                && notification brightness
+
 
 ## Scripts/Programs |}}}
 

@@ -19,13 +19,13 @@ interval=1
 command=~/.config/i3blocks/blocks wifi
 interval=5
 
-[ram]
-command=~/.config/i3blocks/blocks ram
-interval=3
+# [ram]
+# command=~/.config/i3blocks/blocks ram
+# interval=3
 
-[cpu]
-command=~/.config/i3blocks/blocks cpu
-interval=3
+# [cpu]
+# command=~/.config/i3blocks/blocks cpu
+# interval=3
 
 [battery]
 command=~/.config/i3blocks/blocks battery
