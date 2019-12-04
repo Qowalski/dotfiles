@@ -4,6 +4,8 @@
 " (_)_/|_|_|_|_|_| \__|
 "
 
+" if file gets closed and is empty or only has a shebang, delete it
+
 "" -- Plug        |{{{
 
     let g:PlugFresh = 0
@@ -108,44 +110,173 @@
              \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
              \ . ">"<CR>
 
-        " make file executable
-        function! MakeExecutable()
-            let fname = expand("%:p")
+        function! InList(list, item) " {{{
+            " tests if given item is in list
+            " returns 0 if found, 1 otherwise
+            if !index(a:list, a:item) <= 0
+                return 1
+            endif
+        endfunction " }}}
+
+        function! SearchBuffer(pattern, lines, ret) " {{{
+            " searches for pattern in current buffer for n lines
+            " returns linenumber or 0 if nothing was found
+
+            " save cursor position
+            " and move cursor to top of buffer
+            let l:scur = getcurpos()
+            call cursor(1, 1)
+
+            " search in buffer until a:lines line
+            let l:result = search(a:pattern, "c", a:lines)
+
+            " reset cursor
+            " and return result
+            call setpos(".", scur)
+            if a:ret ==# "bool"
+                if result == 0 | return 1 | else | return 0 | endif
+            elseif a:ret ==# "lines"
+                return l:result
+            endif
+        endfunction " }}}
+
+        function! MakeExecutable() " {{{
+            " make success message prettier
+
+            " make current file executable
+
+            " fullpath to current file
+            let l:fpath = expand("%:p")
+
+            if executable(fpath)
+                echo "Already executable"
+                return 0
+            endif
+
+            " test if filename exists and try to write file at success
+            if fpath ==? ""
+                echo "No filename!"
+                return 1
+            else
+                try
+                    write
+                catch /.*/
+                    echom "Cannot write to file"
+                    return 1
+                endtry
+            endif
+
+            " make file executable
+            write
             checktime
-            execute "au FileChangedShell " . fname . " :echo"
+            execute "au FileChangedShell " . fpath . " :echo"
             silent !chmod +x %
             checktime
-            execute "au! FileChangedShell " . fname
+            execute "au! FileChangedShell " . fpath
             redraw!
-        endfunction
+            echo system("ls -l " . fpath)
+        endfunction " }}}
 
-        " put 'shebang' on first line
-        function! PutShebang()
-            if expand("%:t") ==? ".bashrc" | return 1 | endif
-            let l:ftypes = {
-                        \ "sh": "sh",
+        function! Shebang() " {{{
+            " if buffer is empty, put cursor under shebang in insert mode
+            " if a shebang exists but is not on the first line, move it there
+
+            " puts a shebang on the first line
+
+            " check if buffer has a shebang
+            if !SearchBuffer("#\ *!/.*", 20, "bool")
+                return 1
+            endif
+
+            " full path from current file
+            let l:fpath = expand("%:p")
+
+            " default shebang
+            let l:shebang = "#!/usr/bin/env "
+
+            " getintr[<filetype>] -> interpreter
+            " add more as needed
+            let l:getintr = {
+                        \ "sh":     "sh",
                         \ "python": "python3"
                         \ }
 
-            let l:she = "#!/usr/bin/env "
+            " forbidden extensions
+            " e.g. python files with .py don't need a shebang
+            let l:fextensions = [
+                        \ "py"
+                        \ ]
+
+            " regex for special files that don't need a shebang
+            let l:spfile = [
+                        \ "\.bash.*",
+                        \ "\.inputrc.*",
+                        \ "\.xinitrc.*"
+                        \ ]
+
+            " test for special files that don't need a shebang
+            for sfl in spfile
+                if fpath =~ sfl | return 1 | endif
+            endfor
+
+            " determine filetype
+            " if &ft is not set, ask user
             if &ft ==? ""
-                call append(0, she)
-                call feedkeys("ggA")
-                return 0
+                let l:ftype = input("Filetype: ")
+                redraw
+            else
+                let l:ftype = &ft
             endif
 
-            if has_key(ftypes, &ft)
-                let l:bang = she . ftypes[&ft]
+            "  write shebang if filetype is in dictionary of supported filetypes
+            if has_key(getintr, ftype)
+                call append(0, [shebang . getintr[ftype], ""])
+                " startinsert
+                filetype detect
+                echo "SHEBANG!"
+            else
+                return 1
+            endif
+        endfunction " }}}
+
+        function! FileExecute(fpath) " {{{
+            " make eargs optional
+
+            " executes given file with corresponding interpreter
+            " a:fpath should be the full path
+
+            if !executable(a:fpath)
+                echo "File not executable!"
+                return 1
             endif
 
-            if exists("bang") && getline(1) !~ "^#\ *!.*" && expand("%:e") !=? "py"
-                call append(0, [bang, ""])
-                return 0
-            endif
-        endfunction
+            " getintr[<filetype>] -> interpreter
+            " add more as needed
+            let l:getintr = {
+                        \ "python": "python",
+                        \ "sh":     "",
+                        \ }
 
-        command! Bang call PutShebang()
-        autocmd FileType * call PutShebang()
+            " ask for optional arguments
+            let l:eargs = input("Additional argument: ")
+
+            " get interpreter
+            if has_key(getintr, &ft)
+                let l:intr = getintr[&ft]
+            else
+                echo "Filetype not supported"
+                return 1
+            endif
+
+            " make file executable if necessary
+            " files with extensions are ignored, e.g. hello.py
+            if !expand("%:e") !=? "" && !executable(fpath)
+                if !MakeExecutable() | return 1 | endif
+            endif
+
+            " construct and execute command
+            execute "!clear; " . intr . " " . a:fpath . " " . eargs
+        endfunction " }}}
 
 
     "" - specials |}}}
@@ -157,6 +288,11 @@
     " leader
         let mapleader = ","
         nnoremap <space> <C-w>
+
+        nnoremap mfr :call FileExecute(expand("%:p"))<CR>
+        nnoremap mfb :call PutShebang()<CR>
+        nnoremap mfe :call MakeExecutable()<CR>
+        nnoremap <leader>c :so $MYVIMRC<CR>
 
     " defaults
         nnoremap Y y$
@@ -173,9 +309,6 @@
 
     " split next
         nnoremap <C-w><space> <C-w>w
-
-    " make file executable
-        map <leader>e :call MakeExecutable()<CR>
 
 
 "" -- keymapping  |}}}
