@@ -70,15 +70,15 @@ battery() { # {{{
 
     case "${1}" in
         Charging)
-            state="$(colorize bold yellow "++")";;
+            state="$(colorize bold green "++")";;
         Discharging)
             state="$(colorize bold red "--")";;
         Full)
             state="$(colorize bold green "==")";;
     esac
 
-    load="$(colorize italic bblack "${2}")"
-    time="$(colorize italic bblack "${3}")"
+    load="$(colorize italic magenta "${2}")"
+    time="$(colorize italic magenta "${3}")"
 
     printf "%s%s %s\n" "${state}" "${load}" "${time}"
 } # }}}
@@ -89,7 +89,7 @@ wifi() { # {{{
 
     if [ -n "${1}" ]; then
         ssid="$(colorize italic green "${2}")"
-        signal="$(colorize italic bblack "${3}%")"
+        signal="$(colorize italic magenta "${3}%")"
         printf "%s %s\n" "${ssid}" "${signal}"
     else
         msg=$(colorize bold red "NO WIFI")
