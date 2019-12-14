@@ -3,45 +3,28 @@
 #   \ \/ / | '_ \| | __| '__/ __|
 #  _ >  <| | | | | | |_| | | (__
 # (_)_/\_\_|_| |_|_|\__|_|  \___|
+#
 
-#!/bin/bash
+# Merge .Xresources
+[ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
-## General     |{{{
-    [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources &
+# Host specific settings
+case "$(hostname)" in
+    tapcie)
+        xrandr --output DisplayPort-1 --primary --mode 1920x1080 --rate 144
+        xrandr --output HDMI-A-1 --mode 1920x1080 --rate 60
+        ;;
 
-    if [[ $(uname -n) == "tanoie" ]]; then
+    tanoie)
+        xrandr --output eDP1 --primary --mode 1920x1080 --rate 144
         toggletouch &
-    fi
+esac
 
+# Mouse and keyboard settings
+mouse-settings &
+setxkbmap us -option caps:swapescape
 
-# General       |}}}
-## Output      |{{{
-    set_output() {
-        output=${1}
-        rate=${2}
-        [[ ${3} == primary ]] && primary="--primary" || primary=""
-
-        if [[ -n $(xrandr | grep -io ${1}) ]]; then
-            xrandr --output ${output} ${primary} --mode 1920x1080 --rate ${rate} &
-        fi
-    }
-
-    if [[ $(uname -n) == "tanoie" ]]; then
-        set_output eDP1 144 primary
-    elif [[ $(uname -n) == "tapcie" ]]; then
-        set_output DisplayPort-1 144 primary
-        set_output HDMI-A-1 60
-    fi
-
-
-## Output      |}}}
-## IO Settings |{{{
-    mouse-settings &
-    setxkbmap us -option caps:swapescape
-
-
-## IO Settings |}}}
-
+# Start i3
 exec i3
 
 # vim:ft=sh
