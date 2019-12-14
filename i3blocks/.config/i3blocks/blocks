@@ -48,7 +48,7 @@ colorize() { # {{{
 
 date_time() { # {{{
     cmd=$(date "+%R")
-    time=$(colorize magenta italic "${cmd}")
+    time=$(colorize bmagenta italic "${cmd}")
     printf "%s \n" "${time}"
 } # }}}
 
@@ -56,9 +56,9 @@ keyboard() { # {{{
     cmd=$(setxkbmap -query | awk '/layout/ {print $2}')
 
     if [ "$(xset q | awk '/Caps Lock/ {print $4}')" = "on" ]; then
-        layout=$(colorize magenta bold "${cmd}")
+        layout=$(colorize bmagenta bold "${cmd}")
     else
-        layout=$(colorize magenta italic "${cmd}")
+        layout=$(colorize bmagenta italic "${cmd}")
     fi
 
     printf "%s\n" "${layout}"
@@ -117,8 +117,8 @@ media() { # {{{
         exit 1
     }
 
-    color="magenta"
-    [ "$(playerctl status)" = "Paused" ] && color="blue"
+    color="bmagenta"
+    [ "$(playerctl status)" = "Paused" ] && color="bblue"
 
     artist="$(colorize italic "$color" "$cmd_artist")"
     title="$(colorize italic "$color" "$cmd_title")"
@@ -150,14 +150,32 @@ is_laptop() { # {{{
     fi
 } # }}}
 
-case $1 in # {{{
-    date_time) date_time;;
-    keyboard) keyboard;;
-    wifi) wifi;;
-    battery) is_laptop && battery;;
-    audio) audio;;
-    media) media;;
-    ram) is_laptop && ram;;
-    cpu) is_laptop && cpu;;
-    ''|*) printf "ERROR: '%s'\n" "$1";
-esac # }}}
+print_help() {
+    echo "Usage: blocks [command]"
+    echo
+    echo "Commands:"
+    echo "      date_time       Show current time"
+    echo "      keyboard        Show current keyboard layout"
+    echo "      wifi            Show wifi information. <SSID> 78%"
+    echo "      audio           Show volume"
+    echo "      media           Show media with 'playerctl'. <artist> - <title>"
+    echo "      ram             Show current RAM usage"
+    echo "      cpu             Show cpu temperature"
+    echo "      help            Show this message and exit"
+}
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in # {{{
+        date_time) date_time;;
+        keyboard) keyboard;;
+        wifi) wifi;;
+        battery) is_laptop && battery;;
+        audio) audio;;
+        media) media;;
+        ram) is_laptop && ram;;
+        cpu) is_laptop && cpu;;
+        help) print_help; exit 0;;
+        ''|*) printf "ERROR: '%s'\n" "$1";
+    esac # }}}
+    shift
+done

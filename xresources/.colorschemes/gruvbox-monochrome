@@ -1,12 +1,12 @@
 ! normal
 *.color0:       #000000
-*.color1:       #5f2322
-*.color2:       #5a7358
-*.color3:       #222322
-*.color4:       #3b3c3a
-*.color5:       #5a5c58
-*.color6:       #80837d
-*.color7:       #acb0a9
+*.color1:       #9d0006
+*.color2:       #79740e
+*.color3:       #b57614
+*.color4:       #076678
+*.color5:       #8f3f71
+*.color6:       #427b58
+*.color7:       #3c3836
 
 ! bright
 *.color8:       #080808

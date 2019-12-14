@@ -28,8 +28,8 @@
     set_from_resource   $bwhite     i3wm.color15    #ffffff
 
     # special           name        resource        fallback
-    set_from_resource   $background i3wm.background #373737
-    set_from_resource   $foreground i3wm.foreground #c8c8c8
+    set_from_resource   $bg         i3wm.background #373737
+    set_from_resource   $fg         i3wm.foreground #c8c8c8
 
 
 ## -- Xresources   |}}}
@@ -46,12 +46,9 @@
 ## -- General      |}}}
 ## -- Appearance   |{{{
 
-    # gaps inner                      0
-    # gaps outer                      0
-
     # borders
     default_floating_border         normal
-    default_border                  pixel 2
+    default_border                  pixel 3
 
     # windowtitles
     for_window [class=".*"]         title_format "<b>%title</b>"
@@ -59,11 +56,11 @@
 
     font                            pango: FontAwesome 10, Iosevka 12
 
-    # class                         border  background text indicator child_border
-    client.focused                  $blue   $blue    $white $green    $yellow
-    client.focused_inactive         $black  $black   $white $black    $background
-    client.unfocused                $yellow $yellow  $white $black    $background
-    client.urgent                   $red    $red     $white $red      $red
+    # class                         border   background text    indicator child_border
+    client.focused                  $bwhite  $bwhite    $fg     $black    $bcyan
+    client.focused_inactive         $black   $black     $fg     $black    $black
+    client.unfocused                $byellow $byellow   $fg     $black    $black
+    client.urgent                   $red     $red       $black  $red      $red
 
 
 ## -- Appearance   |}}}
@@ -189,10 +186,10 @@
                                         -p "run:" \
                                         -h 27 \
                                         -fn "Iosevka-11" \
-                                        -nb "$black" \
-                                        -nf "$blue" \
-                                        -sb "$black" \
-                                        -sf "$green"
+                                        -nb "$bblack" \
+                                        -nf "$bblue" \
+                                        -sb "$bblack" \
+                                        -sf "$bgreen"
 
     # passmenu
     bindsym $mod1+$mod2+p           exec --no-startup-id    \
@@ -201,10 +198,10 @@
                                         -p "pass:" \
                                         -h 26 \
                                         -fn "Iosevka-11" \
-                                        -nb "$black" \
-                                        -nf "$blue" \
-                                        -sb "$black" \
-                                        -sf "$green"
+                                        -nb "$bblack" \
+                                        -nf "$bblue" \
+                                        -sb "$bblack" \
+                                        -sf "$bgreen"
 
     # audio
     bindsym XF86AudioMute           exec --no-startup-id    \
@@ -305,15 +302,15 @@ bar {
     separator_symbol            "|"
 
     colors {
-        background              $yellow
-        statusline              $blue
-        separator               $green
+        background              $bgreen
+        statusline              $bblue
+        separator               $bblack
 
-        # class                 border background foreground
-        focused_workspace       $yellow   $yellow       $green
-        active_workspace        $yellow   $yellow       $magenta
-        inactive_workspace      $yellow   $yellow       $blue
-        urgent_workspace        $yellow   $yellow       $red
+        # class                 border   background foreground
+        focused_workspace       $bgreen  $bgreen    $green
+        active_workspace        $bgreen  $bgreen    $bmagenta
+        inactive_workspace      $bgreen  $bgreen    $bblue
+        urgent_workspace        $bgreen  $bgreen    $red
     }
 }
 
@@ -329,9 +326,9 @@ bar {
     # dunst
     exec_always --no-startup-id     killall dunst; dunst \
                                     -geom "0x0-28+28" -fn "Iosevka 12" \
-                                    -lf  "$magenta" -nf  "$magenta"   -cf  "$magenta" \
-                                    -lb  "$yellow"  -nb  "$yellow" -cb  "$green" \
-                                    -lfr "$yellow"  -nfr "$yellow" -cfr "$green"
+                                    -lf  "$bmagenta" -nf  "$bmagenta" -cf "$bmagenta" \
+                                    -lb  "$byellow"  -nb  "$byellow"  -cb  "$bgreen" \
+                                    -lfr "$byellow"  -nfr "$byellow"  -cfr "$bgreen"
 
     # wallpaper
     exec_always --no-startup-id     feh --bg-scale ~/.config/wallpaper/C_*
