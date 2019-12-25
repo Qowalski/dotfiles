@@ -13,6 +13,17 @@ export EDITOR="vim"
 export BROWSER="firefox"
 export PROMPT_DIRTRIM=3
 
+if [ -n "$TMUX" ]; then
+    export TERM=screen-256color
+    export INPUTRC=~/.tmux.inputrc
+elif [ -n "$STY" ]; then
+    export TERM=screen-256color
+    export INPUTRC=~/.screen.inputrc
+else
+    export TERM=st-256color
+    export INPUTRC=~/.inputrc
+fi
+
 
 ## Variables     |}}}
 ## Functions     |{{{
@@ -85,6 +96,8 @@ alias musb='mount /dev/sdd1 && echo "mounted sdd1 -> /run/media"'
 alias umusb='umount /dev/sdd1 && echo "unmounted sdd1"'
 alias lsblk='lsblk -o MODEL,NAME,TYPE,FSTYPE,SIZE,MOUNTPOINT'
 
+alias vim='nvim'
+
 # git
 alias ginit='git init'
 alias gstatus='git status'
@@ -134,9 +147,9 @@ PS2='\[\e[1;33m\]\$ \[\e[m\]'
 
 
 ## Prompts       |}}}
-## Path's        |{{{
+## Path        |{{{
 
-export PATH=$PATH:$HOME/.scripts
+export PATH=$PATH:$HOME/.local/bin
 
 
 ## Path's        |}}}
