@@ -57,7 +57,7 @@
     font                            pango: FontAwesome 10, Iosevka 12
 
     # class                         border   background text    indicator child_border
-    client.focused                  $bwhite  $bwhite    $fg     $black    $bcyan
+    client.focused                  $bcyan   $bcyan     $black  $black    $bcyan
     client.focused_inactive         $black   $black     $fg     $black    $black
     client.unfocused                $byellow $byellow   $fg     $black    $black
     client.urgent                   $red     $red       $black  $red      $red
