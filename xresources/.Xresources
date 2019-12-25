@@ -8,11 +8,12 @@
 /* colorschemes */
 /* #include "/home/talkie/.colorschemes/gruvbox-dark" */
 #include "/home/talkie/.colorschemes/monochrome"
+#include "/home/talkie/.colorschemes/default"
 /* #include "/home/talkie/.colorschemes/dracula" */
 
 /* ST */
 /* font */
-st.font: Iosevka-13
+st.font: Iosevka-12
 
 /* border */
 st.borderpx: 60
