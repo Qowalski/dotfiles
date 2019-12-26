@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+case $1 in
+    up) uptime | grep -oP 'up\ *\K[0-9(:)?]+'
+esac

@@ -1,0 +1,148 @@
+$include /etc/inputrc
+
+set editing-mode vi
+set completion-ignore-case on
+set blink-matching-paren on
+set colored-stats on
+set colored-completion-prefix on
+# TAB: menu-complete
+
+$if mode=vi
+    set enable-keypad on
+    set show-mode-in-prompt on
+
+    set vi-ins-mode-string "\1\e[6 q\2"
+    set vi-cmd-mode-string "\1\e[2 q\2"
+
+    set keymap vi-command
+    Control-l: clear-screen
+
+    # history {{{
+    "gg": beginning-of-history
+    "G": end-of-history
+    "?": reverse-search-history
+    "/": forward-search-history
+
+    # history }}}
+    # <word> {{{
+        # inner
+        "diw": "lbde"
+        "ciw": "lbce"
+        "yiw": "lbye"
+
+        # outer
+        "daw": "lbde"
+        "caw": "lbce"
+        "yaw": "lbye"
+
+        # whole inner
+        "diW": "lBdE"
+        "ciW": "lBcE"
+        "yiW": "lByE"
+
+        # whole outer
+        "daW": "lBdW"
+        "caW": "lBcW"
+        "yaW": "lByW"
+
+    # <word>}}}
+    # () {{{
+        # inner
+        "di(": "lT(dt)"
+        "ci(": "di(i"
+        "yi(": "lT(yt)"
+        "di)": "di("
+        "ci)": "ci("
+        "yi)": "yi("
+
+        # outer
+        "da(": "lF(d%"
+        "ca(": "da(i"
+        "ya(": "lF(yf)"
+        "da)": "da("
+        "ca)": "ca("
+        "ya)": "ya("
+
+    # () }}}
+    # {} {{{
+        # inner
+        "di{": "lT{dt}"
+        "ci{": "di{i"
+        "yi{": "lT{yt}"
+        "di}": "di{"
+        "ci}": "ci{"
+        "yi}": "yi{"
+
+        # outer
+        "da{": "lF{df}"
+        "ca{": "da{i"
+        "ya{": "lF{yf}"
+        "da}": "da{"
+        "ca}": "ca{"
+        "ya}": "ya{"
+
+    # {} }}}
+    # [] {{{
+        # inner
+        "di[": "lT[dt]"
+        "ci[": "di[i"
+        "yi[": "lT[yt]"
+        "di]": "di["
+        "ci]": "ci["
+        "yi]": "yi["
+
+        # outer
+        "da[": "lF[df]"
+        "ca[": "da[i"
+        "ya[": "lF[yf]"
+        "da]": "da["
+        "ca]": "ca["
+        "ya]": "ya["
+
+    # [] }}}
+    # <> {{{
+        # inner
+        "di<": "lT<dt>"
+        "ci<": "di<i"
+        "yi<": "lT<yt>"
+        "di>": "di<"
+        "ci>": "ci<"
+        "yi>": "yi<"
+
+        # outer
+        "da<": "lF<d>"
+        "ca<": "da<i"
+        "ya<": "lF<yf>"
+        "da>": "da<"
+        "ca>": "ca<"
+        "ya>": "ya<"
+
+    # <> }}}
+    # "" {{{
+        # inner
+        "di\"": "lT"dt""
+        "ci\"": "di"i"
+        "yi\"": "lT"yt""
+
+        # outer
+        "da\"": "lF"df""
+        "ca\"": "da"i"
+        "ya\"": "lF"yf""
+
+    # "" }}}
+    # '' {{{
+        # inner
+        "di'": "lT'dt'"
+        "ci'": "di'i"
+        "yi'": "lT'yt'"
+
+        # outer
+        "da'": "lF'df'"
+        "ca'": "da'i"
+        "ya'": "lF'yf'"
+
+    # '' }}}
+
+    set keymap vi-insert
+    Control-l: clear-screen
+$endif
