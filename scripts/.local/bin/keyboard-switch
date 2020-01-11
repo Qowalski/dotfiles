@@ -1,0 +1,11 @@
+#!/bin/bash
+
+layout="$(setxkbmap -query | awk '/layout/{print tolower($2)}')"
+
+case $layout in
+    'de') setxkbmap us;;
+    'us') setxkbmap de;;
+esac
+
+# setxkbmap -option caps:swapescape
+setxkbmap -option ctrl:nocaps

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+while true; do
+    for id in $(xinput | grep -oP '(?<=id=)[0-9]+(?=.*slave.*pointer)'); do
+        xinput set-prop "$id" libinput\ Accel\ Profile\ Enabled 0, 1 2>/dev/null
+        xinput set-prop "$id" libinput\ Accel\ Speed -.4 2>/dev/null
+    done
+    sleep 5
+done

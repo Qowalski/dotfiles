@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-mapfile -t ids < \
-    <(xinput | grep -ioP '.*pointer.*' | tail -n+2 | grep -ioP '.*id=\K\d+')
-
-for id in ${ids[@]}; do
-    xinput set-prop ${id} libinput\ Accel\ Profile\ Enabled 0, 1 2>/dev/null
-    xinput set-prop ${id} libinput\ Accel\ Speed -.4 2>/dev/null
-done

@@ -22,6 +22,8 @@ export PROMPT_DIRTRIM=3
 
 export FZF_DEFAULT_COMMAND="find ."
 
+FZF_OPTIONS="--height 50%"
+
 # if [ -n "$TMUX" ]; then
 #     export TERM=screen-256color
 #     export INPUTRC=~/.tmux.inputrc
@@ -64,8 +66,18 @@ c() {
 
 
 ef() {
-    file="$(fzf --height 50%)"
+    # fzf edit file
+
+    file="$(fzf $FZF_OPTIONS --prompt "$EDITOR ")"
     [ -n "$file" ] && $EDITOR "$file"
+}
+
+
+fd() {
+    # fzf find directory
+
+    directory="$(find . -type d | fzf $FZF_OPTIONS --prompt "cd ")"
+    [ -n "$directory" ] && cd "$directory"
 }
 
 
@@ -114,7 +126,7 @@ alias lsblk='lsblk -o MODEL,NAME,TYPE,FSTYPE,SIZE,MOUNTPOINT'
 
 alias vifm='~/.config/vifm/scripts/vifmrun'
 alias vim='$EDITOR'
-alias f='fzf --height 50%'
+alias f='fzf $FZF_OPTIONS --prompt "echo "'
 
 # git
 alias ginit='git init'
