@@ -22,9 +22,11 @@ esac
 
 # Mouse and keyboard settings
 mouse-settings &
-setxkbmap us -option caps:swapescape
+# setxkbmap us -option caps:swapescape
+setxkbmap us -option ctrl:nocaps
 
 # Start i3
 exec i3
+# exec startplasma-x11
 
 # vim:ft=sh

@@ -11,36 +11,20 @@ separator_block_width=30
 markup=pango
 align=center
 
-[media]
-command=~/.config/i3blocks/blocks media
-interval=1
-
-[wifi]
-command=~/.config/i3blocks/blocks wifi
-interval=5
-
-# [ram]
-# command=~/.config/i3blocks/blocks ram
-# interval=3
-
-# [cpu]
-# command=~/.config/i3blocks/blocks cpu
-# interval=3
-
-[battery]
-command=~/.config/i3blocks/blocks battery
-interval=5
-
-# [audio]
-# command=~/.config/i3blocks/blocks audio
+# [media]
+# command=playerctl status >/dev/null 2>&1 && printf "%s - %s\n" "$(playerctl metadata artist)" "$(playerctl metadata title)"
 # interval=1
 
 [keyboard]
-command=~/.config/i3blocks/blocks keyboard
+command=setxkbmap -query | awk '/layout/{print toupper($2)}'
 interval=1
 
+[uptime]
+command=uptime | sed --posix -E 's/.*(up)\ *([0-9:?]+).*/\2 \1/'
+interval=5
+
 [date_time]
-command=~/.config/i3blocks/blocks date_time
+command=date "+%A, %d.%B - %R "
 interval=5
 
 # vim:ft=dosini

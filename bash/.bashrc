@@ -3,26 +3,35 @@
 #   | '_ \ / _` / __| '_ \| '__/ __|
 #  _| |_) | (_| \__ \ | | | | | (__
 # (_)_.__/ \__,_|___/_| |_|_|  \___|
+#
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# always start tmux
+# if [ -z "$TMUX" ] && [ -n "$DISPLAY" ]; then
+#     tmux attach -t main 2>/dev/null || tmux new -s main
+# fi
+
 ## Variables     |{{{
-export TERMINAL="st"
-export EDITOR="vim"
+export TERMINAL="konsole"
+export EDITOR="nvim"
 export BROWSER="firefox"
+
 export PROMPT_DIRTRIM=3
 
-if [ -n "$TMUX" ]; then
-    export TERM=screen-256color
-    export INPUTRC=~/.tmux.inputrc
-elif [ -n "$STY" ]; then
-    export TERM=screen-256color
-    export INPUTRC=~/.screen.inputrc
-else
-    export TERM=st-256color
-    export INPUTRC=~/.inputrc
-fi
+export FZF_DEFAULT_COMMAND="find ."
+
+# if [ -n "$TMUX" ]; then
+#     export TERM=screen-256color
+#     export INPUTRC=~/.tmux.inputrc
+# elif [ -n "$STY" ]; then
+#     export TERM=screen-256color
+#     export INPUTRC=~/.screen.inputrc
+# else
+#     export TERM=st-256color
+#     export INPUTRC=~/.inputrc
+# fi
 
 
 ## Variables     |}}}
@@ -47,11 +56,18 @@ colors() {
     printf "\e[37m└───────┴───────┘\e[m\n"
 }
 
-c(){
+c() {
     # calculator
 
     awk "BEGIN { print $* }"
 }
+
+
+ef() {
+    file="$(fzf --height 50%)"
+    [ -n "$file" ] && $EDITOR "$file"
+}
+
 
 __jc() {
     # prints $, #, job count or # and job count
@@ -96,7 +112,9 @@ alias musb='mount /dev/sdd1 && echo "mounted sdd1 -> /run/media"'
 alias umusb='umount /dev/sdd1 && echo "unmounted sdd1"'
 alias lsblk='lsblk -o MODEL,NAME,TYPE,FSTYPE,SIZE,MOUNTPOINT'
 
-alias vim='nvim'
+alias vifm='~/.config/vifm/scripts/vifmrun'
+alias vim='$EDITOR'
+alias f='fzf --height 50%'
 
 # git
 alias ginit='git init'
@@ -116,8 +134,8 @@ alias gdiff='git diff'
 alias ":w"='echo -e "\e[1;30;41mThis is not VIM!\e[m"'
 alias ":q"='exit'
 alias ":wq"='exit'
-alias ":Q"='echo -e "\e[1;30;41mE498: Not an editor command: Q\e[m"'
-alias ":Wq"='echo -e "\e[1;30;41mE492: Not an editor command: Wq\e[m"'
+alias ":Q"='printf "\e[1;30;41mE498: Not an editor command: Q\e[m\n"'
+alias ":Wq"='printf "\e[1;30;41mE492: Not an editor command: Wq\e[m\n"'
 
 # directories
 alias .c='cd $HOME/.config/ && echo "cd -- .config"'
@@ -153,5 +171,6 @@ export PATH=$PATH:$HOME/.local/bin
 
 
 ## Path's        |}}}
+
 
 # vim:foldmethod=marker

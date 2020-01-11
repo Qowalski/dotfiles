@@ -229,12 +229,15 @@
     # media
     bindsym XF86AudioNext           exec --no-startup-id    playerctl next
     bindsym $mod1+F8                exec --no-startup-id    playerctl next
+    bindsym $mod1+bracketright      exec --no-startup-id    playerctl next
 
     bindsym XF86AudioPrev           exec --no-startup-id    playerctl previous
     bindsym $mod1+F5                exec --no-startup-id    playerctl previous
+    bindsym $mod1+bracketleft       exec --no-startup-id    playerctl previous
 
     bindsym XF86AudioPlay           exec --no-startup-id    playerctl play-pause
-    bindsym $mod1+F4                exec --no-startup-id    playerctl play-pause
+    bindsym $mod+F4                 exec --no-startup-id    playerctl play-pause
+    bindsym $mod1+p                 exec --no-startup-id    playerctl play-pause
 
     # laptop
     bindsym XF86MonBrightnessUp     exec --no-startup-id    light -A 10 \
@@ -249,16 +252,16 @@
 ## -- Keybindings  |}}}
 ## -- Workspaces   |{{{
 
-    set $ws1  "1:<i>I</i>"
-    set $ws2  "2:<i>II</i>"
-    set $ws3  "3:<i>III</i>"
-    set $ws4  "4:<i>IV</i>"
-    set $ws5  "5:<i>V</i>"
-    set $ws6  "6:<i>VI</i>"
-    set $ws7  "6:<i>VII</i>"
-    set $ws8  "6:<i>VIII</i>"
-    set $ws9  "6:<i>IX</i>"
-    set $ws10 "6:<i>X</i>"
+    set $ws1  "1:I"
+    set $ws2  "2:II"
+    set $ws3  "3:III"
+    set $ws4  "4:IV"
+    set $ws5  "5:V"
+    set $ws6  "6:VI"
+    set $ws7  "7:VII"
+    set $ws8  "8:VIII"
+    set $ws9  "9:IX"
+    set $ws10 "0:X"
 
 
 ## -- Workspaces   |}}}
@@ -319,9 +322,7 @@ bar {
 ## -- Autostart    |{{{
 
     # picom
-    exec_always --no-startup-id     pgrep picom \
-                                    && killall -s USR1 picom \
-                                    || picom
+    exec_always --no-startup-id     killall picom; picom
 
     # dunst
     exec_always --no-startup-id     killall dunst; dunst \
