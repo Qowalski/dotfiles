@@ -76,7 +76,7 @@ ef() {
 fd() {
     # fzf find directory
 
-    directory="$(find . -type d | fzf $FZF_OPTIONS --prompt "cd ")"
+    directory="$(find . -type d 2>/dev/null | fzf $FZF_OPTIONS --prompt "cd ")"
     [ -n "$directory" ] && cd "$directory"
 }
 
