@@ -12,11 +12,11 @@ markup=pango
 align=center
 
 [battery]
-command=acpi | sed -E 's/.*(Discharging|Charging|Full).*([0-9]+%).*/\2 \1/'
+command=[ -n "$(command -v acpi)" ] && acpi | sed -E 's/.*(Discharging|Charging|Full).*([0-9]{2,}\%).*/\2 \1/'
 interval=5
 
 [wifi]
-command=nmcli -g ACTIVE,SSID d wifi | grep -oP '(?<=yes:).*'
+command=[ "$(hostname)" = "tanoie" ] && nmcli -g ACTIVE,SSID d wifi | grep -oP '(?<=yes:).*'
 interval=5
 
 # [media]
