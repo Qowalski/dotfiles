@@ -5,7 +5,7 @@
 #  |_|____/
 #
 
-## -- Xresources   |{{{
+## -- Xresources    |{{{
 
     # normal            name        resource        fallback
     set_from_resource   $black      i3wm.color0     #000000
@@ -32,8 +32,8 @@
     set_from_resource   $fg         i3wm.foreground #c8c8c8
 
 
-## -- Xresources   |}}}
-## -- General      |{{{
+## -- Xresources    |}}}
+## -- General       |{{{
 
     mouse_warping                   none
     focus_wrapping                  yes
@@ -43,8 +43,8 @@
     workspace_auto_back_and_forth   yes
 
 
-## -- General      |}}}
-## -- Appearance   |{{{
+## -- General       |}}}
+## -- Appearance    |{{{
 
     # borders
     default_floating_border         normal
@@ -63,8 +63,8 @@
     client.urgent                   $red     $red       $black  $red      $red
 
 
-## -- Appearance   |}}}
-## -- Keybindings  |{{{
+## -- Appearance    |}}}
+## -- Keybindings   |{{{
 
 ## Modkeys          |{{{
 
@@ -78,20 +78,21 @@
     floating_modifier   $mod1
 
 
-## Modkeys   |}}}
+## Modkeys          |}}}
 ## Mouse            |{{{
 
-    bindsym --release button                kill
+    bindsym --release button2                kill
     bindsym --whole-window $mod1+button2    kill
 
 
-## Mouse     |}}}
+## Mouse            |}}}
 ## i3               |{{{
 
     bindsym $mod1+$mod2+r   restart
+    bindsym $mod1+$mod2+e   reload
 
 
-## i3        |}}}
+## i3               |}}}
 ## Focus            |{{{
 
     # go to
@@ -138,7 +139,7 @@
     bindsym $mod1+$mod2+space   floating toggle
 
 
-## Focus     |}}}
+## Focus            |}}}
 ## Workspace        |{{{
 
     # go to specific
@@ -249,8 +250,8 @@
 ## Scripts/Programs |}}}
 
 
-## -- Keybindings  |}}}
-## -- Workspaces   |{{{
+## -- Keybindings   |}}}
+## -- Workspaces    |{{{
 
     set $ws1  "1:I"
     set $ws2  "2:II"
@@ -264,21 +265,19 @@
     set $ws10 "0:X"
 
 
-## -- Workspaces   |}}}
-## -- Rules        |{{{
+## -- Workspaces    |}}}
+## -- Rules         |{{{
 
     # general
     assign [class="firefox"]                    $ws3
     assign [class="TeamSpeak 3"]                $ws5
-    assign [class="Wine"]                       $ws5
-    assign [class="minecraft-launcher"]         $ws5
     for_window [class="Spotify"]                move to workspace $ws2
 
     # steam
     assign [class="Steam"]                      $ws4
     for_window [title=".*Steam Guard.*"]        floating enable
 
-    # popups etc.
+    # popups
     for_window [window_role="pop-up"]           floating enable
     for_window [window_role="bubble"]           floating enable
     for_window [window_role="task_dialog"]      floating enable
@@ -286,9 +285,16 @@
     for_window [window_type="dialog"]           floating enable
     for_window [window_type="menu"]             floating enable
 
+    # tridactyl, a firefox extension which can open a vim buffer to edit text in textboxes
+    # is in the official arch repos.
+    for_window [class="tridactyl_editor"]       floating enable
+    for_window [title=".*tridactyl.*"]          floating enable
 
-## -- Rules        |}}}
-## -- Bar          |{{{
+    for_window [title="~.*pulsemixer.*"]         floating enable
+
+
+## -- Rules         |}}}
+## -- Bar           |{{{
 
 bar {
     i3bar_command               i3bar --transparency
@@ -318,8 +324,8 @@ bar {
 }
 
 
-## -- Bar          |}}}
-## -- Autostart    |{{{
+## -- Bar           |}}}
+## -- Autostart     |{{{
 
     # picom
     exec_always --no-startup-id     killall picom; picom
@@ -340,6 +346,6 @@ bar {
                                     && xdotool mouseup 1
 
 
-## -- Autostart    |}}}
+## -- Autostart     |}}}
 
 # vim:foldmethod=marker:ft=i3config

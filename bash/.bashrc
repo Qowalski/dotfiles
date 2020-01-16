@@ -14,7 +14,7 @@
 # fi
 
 ## Variables     |{{{
-export TERMINAL="konsole"
+export TERMINAL="st"
 export EDITOR="nvim"
 export BROWSER="firefox"
 

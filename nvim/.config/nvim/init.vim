@@ -63,7 +63,8 @@ colorscheme default
 hi lineNr                   ctermfg=darkgray
 hi cursorlinenr cterm=bold  ctermfg=201
 hi comment                  ctermfg=34
-hi statusline               ctermfg=7 ctermbg=16
+hi statusline               cterm=bold ctermfg=16 ctermbg=7
+hi statuslineNC             cterm=NONE ctermfg=16 ctermbg=7
 hi vertsplit                ctermfg=7 ctermbg=7
 hi folded                   ctermfg=0 ctermbg=7
 

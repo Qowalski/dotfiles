@@ -1,0 +1,26 @@
+! normal
+st.color0:       #1b1d1e
+st.color1:       #f92672
+st.color2:       #82b414
+st.color3:       #fd971f
+st.color4:       #4e82aa
+st.color5:       #8c54fe
+st.color6:       #465457
+st.color7:       #ccccc6
+
+! bright
+st.color8:       #505354
+st.color9:       #ff5995
+st.color10:      #b6e354
+st.color11:      #feed6c
+st.color12:      #0c73c2
+st.color13:      #9e6ffe
+st.color14:      #899ca1
+st.color15:      #f8f8f2
+
+! special
+st.foreground:   #a0a0a0
+st.background:   #000000
+st.cursorColor:  #aa00ff
+
+! vim:ft=xdefaults
