@@ -13,10 +13,14 @@ call plug#begin('~/.vim/plugs')
     Plug 'mboughaba/i3config.vim'   " syntax highlighting for i3 config
     Plug 'calviken/vim-gdscript3'   " syntax highlighting for godot's scripting language
     Plug 'vimwiki/vimwiki'          " org mode type of plugin
+    Plug 'junegunn/goyo.vim'        " center text
 call plug#end()
 
 let g:vimwiki_list = [{'path': '~/documents/wiki'}] " vimwiki defaults
 
+" source vimrc on goyo leave so we get our colors back
+au! User GoyoLeave nested so $MYVIMRC
+nnoremap <c-g> :Goyo<CR>
 
 " general settings
 set splitbelow splitright   " make splitting non retarted
