@@ -7,7 +7,7 @@
 
 /* colorschemes */
 /* #include "/home/talkie/.colorschemes/gruvbox-dark" */
-/* #include "/home/talkie/.colorschemes/monochrome" */
+#include "/home/talkie/.colorschemes/monochrome"
 /* #include "/home/talkie/.colorschemes/default" */
 #include "/home/talkie/.colorschemes/bl1nk"
 /* #include "/home/talkie/.colorschemes/dracula" */
