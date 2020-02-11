@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+id=647385
+title="Touchpad"
+
+toggle() {
+    xinput ${1} ${device}
+    echo -e "${title}: \e[1;3${2}m${1}d\e[m"
+}
+
+notify() {
+    dunstify -r ${id} "Touchpad"
+}
+
+device=$(xinput | grep -ioP 'touchpad.*id=\K[1-9][0-9]')
+enabled=$(xinput list-props ${device} | grep -ioP 'device enabled.*\K[0-1]')
+
+case ${enabled} in
+    0) toggle enable 2 && notify;;
+    1) toggle disable 1;;
+esac
